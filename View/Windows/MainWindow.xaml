@@ -8,16 +8,62 @@
          xmlns:vm="clr-namespace:PWCreater.ViewModel.Windows"
         
         mc:Ignorable="d"          
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="1000" MinWidth="1000">
 
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-    
-    
+
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MinWidth="480"/>
+                <ColumnDefinition MinWidth="480"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MinWidth="240"/>
+                    <ColumnDefinition MinWidth="240"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Margin="0,15,15,0" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Right">
+                    <CheckBox Content="Строчные латинские буквы (z,x,c,...)"/>
+                    <CheckBox Content="Заглавные латинские буквы (Z,X,C,...)"/>
+                    <CheckBox Content="Спец символы (!,@,#,-)"/>
+                </StackPanel>
+
+                <StackPanel Margin="15,15,0,0" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left" >
+                    <Label Content="Количество символов (1-50):"/>
+                    <TextBox Width="100"/>
+                </StackPanel>
+            </Grid>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15">
+                <Label Content="Способ генерации: "/>
+                <ComboBox Width="200">
+                    <ComboBoxItem>Звуковая карта</ComboBoxItem>
+                    <ComboBoxItem>Движение мыши</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+
+        </Grid>
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Width="100" Text="123" />
+        </StackPanel>
+
+
+
+
     </Grid>
-    
-    
+
+
 </Window>
