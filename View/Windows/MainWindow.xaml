@@ -6,64 +6,93 @@
         xmlns:local="clr-namespace:PWCreater"
         
          xmlns:vm="clr-namespace:PWCreater.ViewModel.Windows"
+         xmlns:fa="http://schemas.fontawesome.io/icons/"
         
         mc:Ignorable="d"          
-        Title="MainWindow" Height="450" Width="1000" MinWidth="1000">
+        Title="MainWindow" Height="1080" Width="1920" MinWidth="1000">
 
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
 
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="450"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition MinWidth="480"/>
-                <ColumnDefinition MinWidth="480"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="1000"/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition MinWidth="240"/>
-                    <ColumnDefinition MinWidth="240"/>
-                </Grid.ColumnDefinitions>
+            <!--Контейнер с интерактивными элементами-->
+            <Grid Grid.Column="1" >
 
-                <StackPanel Margin="0,15,15,0" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Right">
-                    <CheckBox Content="Строчные латинские буквы (z,x,c,...)"/>
-                    <CheckBox Content="Заглавные латинские буквы (Z,X,C,...)"/>
-                    <CheckBox Content="Спец символы (!,@,#,-)"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition MinWidth="480"/>
+                        <ColumnDefinition MinWidth="480"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0" HorizontalAlignment="Right">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MinWidth="240"/>
+                            <ColumnDefinition MinWidth="240"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Margin="0,15,15,0" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Right"  VerticalAlignment="Center">
+                            <CheckBox Content="Строчные латинские буквы (z,x,c,...)"/>
+                            <CheckBox Content="Заглавные латинские буквы (Z,X,C,...)"/>
+                            <CheckBox Content="Спец символы (!,@,#,-)"/>
+                        </StackPanel>
+
+                        <StackPanel Margin="15,15,0,0" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <Label Content="Количество символов (1-32):"/>
+                            <TextBox Width="100"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15">
+                        <Label Content="Способ генерации: "/>
+                        <ComboBox Width="200">
+                            <ComboBoxItem>Звуковая карта</ComboBoxItem>
+                            <ComboBoxItem>Движение мыши</ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+
+                </Grid>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBox FontSize="16" TextAlignment="Center"  Width="400" Text="123" IsReadOnly="True" />
+                    <Button FontSize="16" ToolTip="Копировать">
+                        <fa:FontAwesome Icon="File" Margin="2"/>
+                    </Button>
                 </StackPanel>
 
-                <StackPanel Margin="15,15,0,0" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left" >
-                    <Label Content="Количество символов (1-50):"/>
-                    <TextBox Width="100"/>
+                <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Content="Сгенерировать" FontSize="16" Padding="3">
+                    </Button>
                 </StackPanel>
+
             </Grid>
 
-            <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15">
-                <Label Content="Способ генерации: "/>
-                <ComboBox Width="200">
-                    <ComboBoxItem>Звуковая карта</ComboBoxItem>
-                    <ComboBoxItem>Движение мыши</ComboBoxItem>
-                </ComboBox>
-            </StackPanel>
 
         </Grid>
-
-        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Width="100" Text="123" />
-        </StackPanel>
-
-
+        
 
 
     </Grid>
+    
 
 
 </Window>

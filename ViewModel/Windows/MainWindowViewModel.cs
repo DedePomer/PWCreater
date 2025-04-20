@@ -8,5 +8,6 @@ namespace PWCreater.ViewModel.Windows
 {
     class MainWindowViewModel
     {
+
     }
 }
