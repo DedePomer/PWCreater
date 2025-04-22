@@ -9,7 +9,7 @@
          xmlns:fa="http://schemas.fontawesome.io/icons/"
         
         mc:Ignorable="d"          
-        Title="MainWindow" Height="800" MinHeight="450" Width="1500" MinWidth="1000">
+        Title="MainWindow" Height="800" MinHeight="450" Width="1000" MinWidth="1000">
 
     <Window.DataContext>
         <vm:MainWindowViewModel/>
@@ -47,19 +47,38 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" >
+        <Grid Grid.Row="0">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Color="DarkBlue" Offset="0.0"/>
+                        <GradientStop Color="CadetBlue"  Offset="0.3 "/>
+                        <GradientStop Color="DarkSeaGreen"  Offset="0.4 "/>
+                        <GradientStop Color="YellowGreen"  Offset="0.6 "/>
+                        <GradientStop Color="OrangeRed"  Offset="0.9 "/>
+                        <GradientStop Color="HotPink" Offset="1.0"/>
+                    </LinearGradientBrush.GradientStops>
 
-            <Canvas ClipToBounds="True">
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Border.Effect>
+                    <BlurEffect Radius="50"/>
+                </Border.Effect>
+                <Canvas ClipToBounds="True">
 
-                <Path Stroke="Pink" Fill="{StaticResource Wave1Gradient}" StrokeThickness="20" Data="M 53.163668,5.015058 A 14.738297,8.3696166 0 0 1 66.411418,0.31320367 14.738297,8.3696166 0 0 1 79.66542,5.0223424 M 26.681786,5.0045762 A 14.738297,8.3696166 0 0 0 39.92954,9.706429 14.738297,8.3696166 0 0 0 53.183536,4.9972927 M 0.18990161,5.0151734 A 14.738297,8.3696166 0 0 1 13.437657,0.31332082 14.738297,8.3696166 0 0 1 26.691655,5.022457" Height="54" Stretch="Fill" Width="376" HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <Path.Effect>
-                        <BlurEffect Radius="8"/>
-                        <!--<DropShadowEffect ShadowDepth="1" BlurRadius="8"/>-->
-                    </Path.Effect>
-                </Path>
+                    <!--<Path Stroke="Pink" Fill="{StaticResource Wave1Gradient}" StrokeThickness="20" Data="M 53.163668,5.015058 A 14.738297,8.3696166 0 0 1 66.411418,0.31320367 14.738297,8.3696166 0 0 1 79.66542,5.0223424 M 26.681786,5.0045762 A 14.738297,8.3696166 0 0 0 39.92954,9.706429 14.738297,8.3696166 0 0 0 53.183536,4.9972927 M 0.18990161,5.0151734 A 14.738297,8.3696166 0 0 1 13.437657,0.31332082 14.738297,8.3696166 0 0 1 26.691655,5.022457" Height="54" Stretch="Fill" Width="376" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Path.Effect>
+                            <BlurEffect Radius="30"/>
+                            --><!--<DropShadowEffect ShadowDepth="1" BlurRadius="8"/>--><!--
+                        </Path.Effect>
+                    </Path>-->
 
 
-            </Canvas>
+                </Canvas>
+
+            </Border>
+            
 
 
         </Grid>
