@@ -1,12 +1,27 @@
-<Grid Background="LightSkyBlue">
-            <Path Fill="LightSeaGreen" Stroke="Black" StrokeThickness="2">
-                <Path.Data>
-                    <!-- Волнообразная линия -->
-                    <PathGeometry>
-                        <PathFigure StartPoint="0,200">
-                            <PolyBezierSegment Points="150,150 250,250 400,200 500,150 600,250 700,200" />
-                        </PathFigure>
-                    </PathGeometry>
-                </Path.Data>
-            </Path>
-        </Grid>
+<Window x:Class="WaveBackgroundDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Wave Background" Height="450" Width="800">
+    <Grid>
+        <!-- Волна, использующая VisualBrush в Background -->
+        <Grid.Background>
+            <VisualBrush>
+                <VisualBrush.Visual>
+                    <Path Fill="LightSeaGreen" Stroke="Black" StrokeThickness="2">
+                        <Path.Data>
+                            <!-- Волнообразная линия -->
+                            <PathGeometry>
+                                <PathFigure StartPoint="0,200">
+                                    <PolyBezierSegment Points="150,150 250,250 400,200 500,150 600,250 700,200" />
+                                </PathFigure>
+                            </PathGeometry>
+                        </Path.Data>
+                    </Path>
+                </VisualBrush.Visual>
+            </VisualBrush>
+        </Grid.Background>
+
+        <!-- Содержимое Grid -->
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="White" Text="Wave Background Example" />
+    </Grid>
+</Window>
