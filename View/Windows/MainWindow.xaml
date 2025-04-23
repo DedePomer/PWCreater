@@ -48,7 +48,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Grid.Background>
+            <!--<Grid.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                     <LinearGradientBrush.GradientStops>
                         <GradientStop Color="DarkBlue" Offset="0.0"/>
@@ -60,23 +60,32 @@
                     </LinearGradientBrush.GradientStops>
 
                 </LinearGradientBrush>
-            </Grid.Background>
-            <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <Border.Effect>
-                    <BlurEffect Radius="50"/>
-                </Border.Effect>
+            </Grid.Background>-->
                 <Canvas ClipToBounds="True">
 
-                    <Path Stretch="Fill" Stroke="Pink" StrokeThickness="20" Data="M 53.163668,5.015058 A 14.738297,8.3696166 0 0 1 66.411418,0.31320367 14.738297,8.3696166 0 0 1 79.66542,5.0223424 M 26.681786,5.0045762 A 14.738297,8.3696166 0 0 0 39.92954,9.706429 14.738297,8.3696166 0 0 0 53.183536,4.9972927 M 0.18990161,5.0151734 A 14.738297,8.3696166 0 0 1 13.437657,0.31332082 14.738297,8.3696166 0 0 1 26.691655,5.022457" Height="54" Width="427" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <!--<Path Stretch="Fill" Stroke="Pink" StrokeThickness="20" Data="M 53.163668,5.015058 A 14.738297,8.3696166 0 0 1 66.411418,0.31320367 14.738297,8.3696166 0 0 1 79.66542,5.0223424 M 26.681786,5.0045762 A 14.738297,8.3696166 0 0 0 39.92954,9.706429 14.738297,8.3696166 0 0 0 53.183536,4.9972927 M 0.18990161,5.0151734 A 14.738297,8.3696166 0 0 1 13.437657,0.31332082 14.738297,8.3696166 0 0 1 26.691655,5.022457" Height="54" Width="427" HorizontalAlignment="Left" VerticalAlignment="Center">
                         <Path.Effect>
                             <BlurEffect Radius="30"/>
                         </Path.Effect>
-                    </Path>
+                    </Path>-->
+                <Path Fill="#FF87CEFA" Stretch="Fill" StrokeThickness="0">
+                    <Path.Data>
+                        <PathGeometry>
+                            <PathFigure StartPoint="0,300" IsClosed="True">
+                                <!-- Волны -->
+                                <BezierSegment Point1="100,250" Point2="200,350" Point3="300,300"/>
+                                <BezierSegment Point1="400,250" Point2="500,350" Point3="600,300"/>
+                                <!-- Закрываем фигуру вниз и влево -->
+                                <LineSegment Point="600,400"/>
+                                <LineSegment Point="0,400"/>
+                            </PathFigure>
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
+
+            </Canvas>
 
 
-                </Canvas>
-
-            </Border>
 
 
 
