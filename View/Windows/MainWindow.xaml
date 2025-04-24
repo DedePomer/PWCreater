@@ -9,7 +9,7 @@
          xmlns:fa="http://schemas.fontawesome.io/icons/"
         
         mc:Ignorable="d"          
-        Title="MainWindow" Height="800" MinHeight="450" Width="1600" MinWidth="1000">
+        Title="MainWindow" Height="800" MinHeight="450" Width="1600" MinWidth="960">
 
     <Window.DataContext>
         <vm:MainWindowViewModel/>
@@ -62,12 +62,9 @@
 
             </LinearGradientBrush>
         </Grid.Background>
-
+        
+        <!--Контейнер с интерактивными элементами-->
         <Grid Grid.Row="1" Grid.Column="1" Panel.ZIndex="2">
-
-
-
-            <!--Контейнер с интерактивными элементами-->
             <Grid Grid.Column="1" Panel.ZIndex="2" Background="White">
                 
                 <Grid.RowDefinitions>
