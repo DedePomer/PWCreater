@@ -31,7 +31,6 @@
         </Border>
         <Grid>
             
-
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="450"/>
