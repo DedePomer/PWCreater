@@ -18,7 +18,7 @@
     </Window.DataContext>
 
     <Window.Resources>
-        
+
         <DrawingBrush x:Key="PinkWaveBackground" TileMode="Tile" Viewport="0,0,0.09,0.05">
             <DrawingBrush.Drawing >
                 <DrawingGroup>
@@ -28,12 +28,13 @@
                 </DrawingGroup>
             </DrawingBrush.Drawing>
         </DrawingBrush>
-
+        
     </Window.Resources>
 
 
     <Grid >
         <Grid.Background>
+            
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                 <LinearGradientBrush.GradientStops>
                     <GradientStop Color="DarkBlue" Offset="0.0"/>
@@ -121,10 +122,6 @@
                         <Button Content="Сгенерировать" FontSize="16" Padding="3">
                         </Button>
                     </StackPanel>
-
-
-
-
 
                 </Grid>
             </Grid>

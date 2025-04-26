@@ -109,8 +109,5 @@
     <Folder Include="Data\" />
     <Folder Include="Model\" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="рисунок3.svg" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
