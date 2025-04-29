@@ -75,6 +75,8 @@
     </Compile>
     <Compile Include="Infrastructure\Commands\Base\Command.cs" />
     <Compile Include="Infrastructure\Commands\LamdaComand.cs" />
+    <Compile Include="Infrastructure\Interfaces\IStringGenerator.cs" />
+    <Compile Include="Infrastructure\Interfaces\ISymbolCreater.cs" />
     <Compile Include="ViewModel\Base\ViewModelBase.cs" />
     <Compile Include="ViewModel\Windows\MainWindowViewModel.cs" />
     <Compile Include="View\Windows\MainWindow.xaml.cs">
@@ -110,6 +112,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Infrastructure\Srvices\" />
     <Folder Include="Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
