@@ -1,12 +1,7 @@
 ﻿using NAudio.Wave;
 using PWCreater.Infrastructure.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Security.Cryptography;
+using System.Threading;
 
 namespace PWCreater.Infrastructure.Srvices.Generators
 {
@@ -18,18 +13,18 @@ namespace PWCreater.Infrastructure.Srvices.Generators
         private const int Channels = 1;
         private const int DeviceNumber = 0;
 
-        private const int TimeOfRecording = 1;
+        private const int TimeOfRecordingMilliseconds = 250;
 
 
         private string GenerateString()
         {
-            byte audioByte;
-            byte[] byteArr = new byte[2];
+            byte audioByte = 0;
+
 
             WaveInEvent waveIn = new WaveInEvent();
             waveIn.DeviceNumber = DeviceNumber;
             waveIn.WaveFormat = new WaveFormat(SampleRate, CountBits, Channels);
-            waveIn.BufferMilliseconds = TimeOfRecording*1;
+            waveIn.BufferMilliseconds = TimeOfRecordingMilliseconds;
 
             waveIn.DataAvailable += (sender, e) =>
             {
@@ -37,23 +32,46 @@ namespace PWCreater.Infrastructure.Srvices.Generators
             };
 
             waveIn.StartRecording();
-            Thread.Sleep(TimeOfRecording*1000);
+            Thread.Sleep(TimeOfRecordingMilliseconds);
             waveIn.StopRecording();
             waveIn.Dispose();
             waveIn = null;
 
+            return GetHASHstring(audioByte);
+        }
+
+
+        private string GetHASHstring(byte audioByte)
+        {
+            byte[] byteArr = new byte[2];
+            byte[] HashArr;
+            string HashStr = "";
+            RandomNumberGenerator rng = RandomNumberGenerator.Create();
+
             using (SHA256 mySHA256 = SHA256.Create())
             {
-                var randomNumber = RandomNumberGenerator.GetInt32(Int32.MaxValue);
+                rng.GetBytes(byteArr, 1, 1);
+                byteArr[0] = audioByte;
 
-
+                HashArr = mySHA256.ComputeHash(byteArr);
+                foreach (byte b in HashArr)
+                {
+                    HashStr += b.ToString("x2");
+                }
             }
+            return HashStr;
         }
+
 
 
         public string[] GetGeneratedString(int stringCount)
         {
-            throw new NotImplementedException();
+            string[] HashStrigs = new string[stringCount];
+            for (int i = 0; i < stringCount; i++)
+            {
+                HashStrigs[i] = GenerateString();
+            }
+            return HashStrigs;
         }
 
     }
