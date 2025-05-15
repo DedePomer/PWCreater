@@ -41,7 +41,14 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
             return screenResolution;
         }
 
-
+        private bool IsDotLiesOnZone(DotDataType dot, RectangleZoneDataType zone) /*только для 4 чертверти системы координат*/
+        {
+            if ((dot.X > zone.firstPoint.X && dot.Y > zone.firstPoint.Y) && (dot.X < zone.secondPoint.X && dot.Y < zone.secondPoint.Y))
+            {
+                return true;
+            }
+            return false;
+        }
 
 
 
