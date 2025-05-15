@@ -3,6 +3,7 @@ using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.DataType
 using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.Enums;
 using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.Structurs;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
@@ -27,6 +28,9 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
 
         public string[] GetGeneratedString(int stringCount)
         {
+            List<string> dots = new List<string>();
+
+
             throw new NotImplementedException();
         }
 
