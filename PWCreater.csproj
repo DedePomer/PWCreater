@@ -109,12 +109,15 @@
     </Compile>
     <Compile Include="Infrastructure\Commands\Base\Command.cs" />
     <Compile Include="Infrastructure\Commands\LamdaComand.cs" />
-    <Compile Include="Infrastructure\Enums\DeviceCapEnum.cs" />
+    <Compile Include="Infrastructure\Srvices\Generators\CursorStringGenerator\DataType\DotDataType.cs" />
+    <Compile Include="Infrastructure\Srvices\Generators\CursorStringGenerator\DataType\RectangleZoneDataType.cs" />
+    <Compile Include="Infrastructure\Srvices\Generators\CursorStringGenerator\DataType\ScreenResolutionDataType.cs" />
+    <Compile Include="Infrastructure\Srvices\Generators\CursorStringGenerator\Enums\DeviceCapEnum.cs" />
     <Compile Include="Infrastructure\Interfaces\IStringGenerator.cs" />
     <Compile Include="Infrastructure\Interfaces\ISymbolCreater.cs" />
-    <Compile Include="Infrastructure\Srvices\Generators\AudioStringGenerator.cs" />
-    <Compile Include="Infrastructure\Srvices\Generators\PositionStringGenerator.cs" />
-    <Compile Include="Infrastructure\Structurs\PointStruct.cs" />
+    <Compile Include="Infrastructure\Srvices\Generators\AudioStringGenrator\AudioStringGenerator.cs" />
+    <Compile Include="Infrastructure\Srvices\Generators\CursorStringGenerator\PositionStringGenerator.cs" />
+    <Compile Include="Infrastructure\Srvices\Generators\CursorStringGenerator\Structurs\PointStruct.cs" />
     <Compile Include="ViewModel\Base\ViewModelBase.cs" />
     <Compile Include="ViewModel\Windows\MainWindowViewModel.cs" />
     <Compile Include="View\Windows\MainWindow.xaml.cs">
@@ -150,6 +153,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Infrastructure\Enums\" />
+    <Folder Include="Infrastructure\Structurs\" />
     <Folder Include="Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

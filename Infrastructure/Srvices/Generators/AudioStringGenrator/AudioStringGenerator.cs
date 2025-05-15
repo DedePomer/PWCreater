@@ -3,7 +3,7 @@ using PWCreater.Infrastructure.Interfaces;
 using System.Security.Cryptography;
 using System.Threading;
 
-namespace PWCreater.Infrastructure.Srvices.Generators
+namespace PWCreater.Infrastructure.Srvices.Generators.AudioStringGenrator
 {
     public class AudioStringGenerator : IStringGenerator
     {

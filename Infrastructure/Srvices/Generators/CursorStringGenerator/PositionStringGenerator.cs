@@ -1,11 +1,12 @@
-﻿using PWCreater.Infrastructure.Enums;
-using PWCreater.Infrastructure.Interfaces;
-using PWCreater.Infrastructure.Structurs;
+﻿using PWCreater.Infrastructure.Interfaces;
+using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.DataType;
+using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.Enums;
+using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.Structurs;
 using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
-namespace PWCreater.Infrastructure.Srvices.Generators
+namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
 {
     public class PositionStringGenerator : IStringGenerator
     {
@@ -15,12 +16,12 @@ namespace PWCreater.Infrastructure.Srvices.Generators
         [DllImport("gdi32.dll", CharSet = CharSet.Auto, SetLastError = true, ExactSpelling = true)]
         private static extern int GetDeviceCaps(IntPtr hDC, int nIndex);
 
-        private const int FistZone = 2;
-        private const int SecondZone = 2;
-        private const int ThirdZone = 20;
-        private const int FourthZone = 20;
-        private const int FifthZone = 10;
-        private const int SixthZone = 10;
+        private int _fistZone = 2;
+        private int _secondZone = 2;
+        private int _thirdZone = 20;
+        private int _fourthZone = 20;
+        private int _fifthZone = 10;
+        private int _sixthZone = 10;
 
 
 
@@ -29,6 +30,16 @@ namespace PWCreater.Infrastructure.Srvices.Generators
             throw new NotImplementedException();
         }
 
+        private  ScreenResolutionDataType GetScreenResolution() /*не проверял с несколькими экранами*/
+        {
+            Graphics graphics = Graphics.FromHwnd(IntPtr.Zero);
+            IntPtr desktop = graphics.GetHdc();
+
+            ScreenResolutionDataType screenResolution = new ScreenResolutionDataType();
+            screenResolution.Widh = GetDeviceCaps(desktop, (int)DeviceCapEnum.HORZRES);
+            screenResolution.Height = GetDeviceCaps(desktop, (int)DeviceCapEnum.VERTRES);
+            return screenResolution;
+        }
 
 
 
@@ -37,7 +48,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators
 
 
         //метод для получения маштаба интерфейса, не используется
-        /*private static float GetScalingFactor()
+        /*private float GetScalingFactor()
         {
             using Graphics g = Graphics.FromHwnd(IntPtr.Zero);
             IntPtr desktop = g.GetHdc();

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PWCreater.Infrastructure.Enums
+namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.Enums
 {
     public enum DeviceCapEnum
     {
