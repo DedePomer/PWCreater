@@ -44,8 +44,8 @@ namespace PWCreater.Infrastructure.Srvices.Generators
         private string GetHASHstring(byte audioByte)
         {
             byte[] byteArr = new byte[2];
-            byte[] HashArr;
-            string HashStr = "";
+            byte[] hashArr;
+            string hashStr = "";
             RandomNumberGenerator rng = RandomNumberGenerator.Create();
 
             using (SHA256 mySHA256 = SHA256.Create())
@@ -53,25 +53,25 @@ namespace PWCreater.Infrastructure.Srvices.Generators
                 rng.GetBytes(byteArr, 1, 1);
                 byteArr[0] = audioByte;
 
-                HashArr = mySHA256.ComputeHash(byteArr);
-                foreach (byte b in HashArr)
+                hashArr = mySHA256.ComputeHash(byteArr);
+                foreach (byte b in hashArr)
                 {
-                    HashStr += b.ToString("x2");
+                    hashStr += b.ToString("x2");
                 }
             }
-            return HashStr;
+            return hashStr;
         }
 
 
 
         public string[] GetGeneratedString(int stringCount)
         {
-            string[] HashStrigs = new string[stringCount];
+            string[] hashStrigs = new string[stringCount];
             for (int i = 0; i < stringCount; i++)
             {
-                HashStrigs[i] = GenerateString();
+                hashStrigs[i] = GenerateString();
             }
-            return HashStrigs;
+            return hashStrigs;
         }
 
     }
