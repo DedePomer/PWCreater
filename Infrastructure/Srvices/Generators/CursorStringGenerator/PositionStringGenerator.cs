@@ -1,4 +1,5 @@
-﻿using PWCreater.Infrastructure.Interfaces;
+﻿using NAudio.Gui;
+using PWCreater.Infrastructure.Interfaces;
 using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.DataType;
 using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.Enums;
 using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.Structurs;
@@ -6,6 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
+using System.Windows;
 
 namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
 {
@@ -34,54 +38,114 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
         private int _countDotInFifthZone = 10;
         private int _countDotInSixthZone = 10;
 
-        private RectangleZoneDataType _firstZone; /*спросить у миши как можно реализовать это по эстетичнее*/
-        private RectangleZoneDataType _secondZone;
-        private RectangleZoneDataType _thirdZone;
-        private RectangleZoneDataType _fourthZone;
-        private RectangleZoneDataType _fifthZone;
-        private RectangleZoneDataType _sixthZone;
-
-
-
-
 
         public string[] GetGeneratedString(int stringCount)
         {
-            List<string> dots = new List<string>();
+            string[] dots = GetCheckedString(stringCount);
+            return dots;
+        }
+
+        private string[] GetHASHstrings(string[] strings)
+        {
+            byte[] convertedString = new byte[strings.Length];
+            for (int i = 0; i < strings.Length; i++)
+            {
+                convertedString[i] = Encoding.UTF8.GetBytes(strings[i]);
+            }
+        }
+
+        private string[] GetCheckedString(int stringCount)
+        {
+            string[] dots = new string[stringCount];
+            int x = 0, y = 0;
+
+            for(int i = 0; i < dots.Length; i++)
+            {
+                PointStruct point;
+                if (GetCursorPos(out point) && point.X != x && point.Y != y
+                    && IsChangedCountDotsInZone(new DotDataType() { X = point.X, Y = point.Y }))
+                {
+                    dots[i] = point.X + "" + point.Y;
+                    x = point.X;
+                    y = point.Y;
+                }
+                Thread.Sleep(300);
+            }
+
+            return dots;
+        }
+
+        private bool IsChangedCountDotsInZone(DotDataType dot)
+        {
             ScreenResolutionDataType screenResolution = GetScreenResolution();
-            _firstZone = new RectangleZoneDataType(
-                new DotDataType
-                { X = screenResolution.Widh * OneFourt, Y = screenResolution.Height * OneThrid },
-                new DotDataType
-                { X = screenResolution.Widh * TwoFourths, Y = screenResolution.Height * TwoThrids });
-            _secondZone = new RectangleZoneDataType(
+            RectangleZoneDataType firstZone = new RectangleZoneDataType(
+        new DotDataType
+        { X = screenResolution.Widh * OneFourth, Y = screenResolution.Height * OneThrid },
+        new DotDataType
+        { X = screenResolution.Widh * TwoFourths, Y = screenResolution.Height * TwoThrids });
+            RectangleZoneDataType secondZone = new RectangleZoneDataType(
                 new DotDataType
                 { X = screenResolution.Widh * TwoFourths, Y = screenResolution.Height * OneThrid },
                 new DotDataType
                 { X = screenResolution.Widh * ThreeFourths, Y = screenResolution.Height * TwoThrids });
-            _thirdZone = new RectangleZoneDataType(
+            RectangleZoneDataType thirdZone = new RectangleZoneDataType(
                 new DotDataType
                 { X = screenResolution.Widh * ThreeFourths, Y = screenResolution.Height * Zero },
                 new DotDataType
                 { X = screenResolution.Widh * Unit, Y = screenResolution.Height * Zero });
-            _fourthZone = new RectangleZoneDataType(
+            RectangleZoneDataType fourthZone = new RectangleZoneDataType(
                 new DotDataType
                 { X = screenResolution.Widh * Zero, Y = screenResolution.Height * Zero },
                 new DotDataType
                 { X = screenResolution.Widh * OneFourth, Y = screenResolution.Height * Unit });
-            _fifthZone = new RectangleZoneDataType(
+            RectangleZoneDataType fifthZone = new RectangleZoneDataType(
                 new DotDataType
                 { X = screenResolution.Widh * OneFourth, Y = screenResolution.Height * Zero },
                 new DotDataType
                 { X = screenResolution.Widh * ThreeFourths, Y = screenResolution.Height * OneThrid });
-            _sixthZone = new RectangleZoneDataType(
+            RectangleZoneDataType sixthZone = new RectangleZoneDataType(
                 new DotDataType
                 { X = screenResolution.Widh * OneFourth, Y = screenResolution.Height * TwoThrids },
                 new DotDataType
                 { X = screenResolution.Widh * ThreeFourths, Y = screenResolution.Height * Unit });
 
+            if (IsDotLiesOnZone(dot, firstZone) && _countDotInFistZone > 0)
+            {
+                _countDotInFistZone--;
+                return true;
+            }
 
-            throw new NotImplementedException();
+            if (IsDotLiesOnZone(dot, secondZone) && _countDotInSecondZone > 0)
+            {
+                _countDotInSecondZone--;
+                return true;
+            }
+
+            if (IsDotLiesOnZone(dot, thirdZone) && _countDotInThirdZone > 0)
+            {
+                _countDotInThirdZone--;
+                return true;
+            }
+
+            if (IsDotLiesOnZone(dot, fourthZone) && _countDotInFourthZone > 0)
+            {
+                _countDotInFourthZone--;
+                return true;
+            }
+
+            if (IsDotLiesOnZone(dot, fifthZone) && _countDotInFifthZone > 0)
+            {
+                _countDotInFifthZone--;
+                return true;
+            }
+
+            if (IsDotLiesOnZone(dot, sixthZone) && _countDotInSixthZone > 0)
+            {
+                _countDotInSixthZone--;
+                return true;
+            }
+
+            return false;
         }
 
         private  ScreenResolutionDataType GetScreenResolution() /*не проверял с несколькими экранами*/
