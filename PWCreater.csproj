@@ -109,6 +109,7 @@
     </Compile>
     <Compile Include="Infrastructure\Commands\Base\Command.cs" />
     <Compile Include="Infrastructure\Commands\LamdaComand.cs" />
+    <Compile Include="Infrastructure\Srvices\ChekStringSymbols.cs" />
     <Compile Include="Infrastructure\Srvices\Generators\CursorStringGenerator\DataType\DotDataType.cs" />
     <Compile Include="Infrastructure\Srvices\Generators\CursorStringGenerator\DataType\RectangleZoneDataType.cs" />
     <Compile Include="Infrastructure\Srvices\Generators\CursorStringGenerator\DataType\ScreenResolutionDataType.cs" />

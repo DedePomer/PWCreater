@@ -12,8 +12,8 @@ namespace PWCreater.ViewModel.Windows
 {
     internal class MainWindowViewModel : ViewModelBase
     {
-        private int? _countSymbolsInPasswords = 16;
-        public int? CountSymbolsInPasswords
+        private string _countSymbolsInPasswords = "16";
+        public string CountSymbolsInPasswords
         {
             get
             {
@@ -23,12 +23,12 @@ namespace PWCreater.ViewModel.Windows
             {
                 try
                 {
-                    _countSymbolsInPasswords = value;
-                    if (_countSymbolsInPasswords <= 0 && _countSymbolsInPasswords < 33)
-                    {
-                        _countSymbolsInPasswords = 1;
-                        throw new Exception("Количество символо должно быть больше нуля и меньше 32");
-                    }
+                    //_countSymbolsInPasswords = value;
+                    //if (_countSymbolsInPasswords <= 0 && _countSymbolsInPasswords < 33)
+                    //{
+                    //    _countSymbolsInPasswords = 1;
+                    //    throw new Exception("Количество символо должно быть больше нуля и меньше 32");
+                    //}
                 }
                 catch(Exception e)
                 {
@@ -36,8 +36,11 @@ namespace PWCreater.ViewModel.Windows
                 }
             }
         }
+
+        public MainWindowViewModel()
+        { 
         
-        
+        }
 
 
 
