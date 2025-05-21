@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Windows;
@@ -42,16 +43,24 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
         public string[] GetGeneratedString(int stringCount)
         {
             string[] dots = GetCheckedString(stringCount);
-            return dots;
+            return GetHASHstrings(dots);
         }
 
         private string[] GetHASHstrings(string[] strings)
         {
-            byte[] convertedString = new byte[strings.Length];
             for (int i = 0; i < strings.Length; i++)
             {
-                convertedString[i] = Encoding.UTF8.GetBytes(strings[i]);
+                byte[] convertedString = Encoding.UTF8.GetBytes(strings[i]);
+                using (SHA256 mySHA256 = SHA256.Create())
+                {
+                    byte[] hashs = mySHA256.ComputeHash(convertedString);
+                    foreach (byte b in hashs)
+                    {
+                        strings[i] += b.ToString("x2");
+                    }
+                }
             }
+            return strings;
         }
 
         private string[] GetCheckedString(int stringCount)
