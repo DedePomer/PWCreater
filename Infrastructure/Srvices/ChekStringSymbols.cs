@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PWCreater.Infrastructure.Srvices
+﻿namespace PWCreater.Infrastructure.Srvices
 {
-    internal class ChekStringSymbols
+    public class ChekStringSymbols
     {
         public bool ThisStrigIsNumber(string number)
         {
@@ -14,7 +8,7 @@ namespace PWCreater.Infrastructure.Srvices
 
             for (int i = 0; i < numbers.Length; i++)
             {
-                switch(numbers[i])
+                switch (numbers[i])
                 {
                     case '0':
                         break;
@@ -40,9 +34,9 @@ namespace PWCreater.Infrastructure.Srvices
                         return false;
 
                 }
-            
-        
-        }
+
+
+            }
 
             return true;
         }

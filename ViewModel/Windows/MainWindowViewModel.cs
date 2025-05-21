@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Interop;
 using System.Windows;
 using PWCreater.ViewModel.Base;
+using PWCreater.Infrastructure.Srvices;
 
 namespace PWCreater.ViewModel.Windows
 {
@@ -23,12 +24,13 @@ namespace PWCreater.ViewModel.Windows
             {
                 try
                 {
-                    //_countSymbolsInPasswords = value;
-                    //if (_countSymbolsInPasswords <= 0 && _countSymbolsInPasswords < 33)
-                    //{
-                    //    _countSymbolsInPasswords = 1;
-                    //    throw new Exception("Количество символо должно быть больше нуля и меньше 32");
-                    //}
+                    
+                    _countSymbolsInPasswords = value;
+                    if (ThisStrigIsNumber(_countSymbolsInPasswords))
+                    {
+                        _countSymbolsInPasswords = 1;
+                        throw new Exception("Количество символо должно быть больше нуля и меньше 32");
+                    }
                 }
                 catch(Exception e)
                 {
