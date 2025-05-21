@@ -75,7 +75,7 @@
 
                             <StackPanel Margin="15,15,0,0" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
                                 <Label Content="Количество символов (1-32):"/>
-                                <TextBox Width="100"/>
+                                <TextBox Text="{Binding CountSymbolsInPasswords, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
                             </StackPanel>
                         </Grid>
 

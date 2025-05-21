@@ -1,22 +1,19 @@
-﻿using NAudio.Gui;
-using PWCreater.Infrastructure.Interfaces;
+﻿using PWCreater.Infrastructure.Interfaces;
 using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.DataType;
 using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.Enums;
 using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.Structurs;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
-using System.Windows;
 
 namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
 {
     public class PositionStringGenerator : IStringGenerator
     {
-        /*константы для определения границ зон*/ 
+        /*константы для определения границ зон*/
         private const float OneFourth = 0.25f;
         private const float TwoFourths = 0.5f;
         private const float ThreeFourths = 0.75f;
@@ -68,7 +65,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
             string[] dots = new string[stringCount];
             int x = 0, y = 0;
 
-            for(int i = 0; i < dots.Length; i++)
+            for (int i = 0; i < dots.Length; i++)
             {
                 PointStruct point;
                 if (GetCursorPos(out point) && point.X != x && point.Y != y
@@ -157,7 +154,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
             return false;
         }
 
-        private  ScreenResolutionDataType GetScreenResolution() /*не проверял с несколькими экранами*/
+        private ScreenResolutionDataType GetScreenResolution() /*не проверял с несколькими экранами*/
         {
             Graphics graphics = Graphics.FromHwnd(IntPtr.Zero);
             IntPtr desktop = graphics.GetHdc();
