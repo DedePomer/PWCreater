@@ -1,8 +1,10 @@
-﻿namespace PWCreater.Infrastructure.Srvices
+﻿using System;
+
+namespace PWCreater.Infrastructure.Srvices
 {
     public class ChekStringSymbols
     {
-        public bool ThisStrigIsNumber(string number)
+        private bool ThisStrigIsNumber(string number)
         {
             char[] numbers = number.ToCharArray();
 
@@ -41,5 +43,17 @@
             return true;
         }
 
+        public bool IsNumberSuitable(string number)
+        {
+            if (ThisStrigIsNumber(number) && number.Length > 0)
+            {
+                int intNumber = Convert.ToInt32(number);
+                if (intNumber > 0 && intNumber < 33)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

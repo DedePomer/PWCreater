@@ -13,7 +13,7 @@ namespace PWCreater.ViewModel.Windows
 {
     internal class MainWindowViewModel : ViewModelBase
     {
-        private string _countSymbolsInPasswords = "16";
+        private string _countSymbolsInPasswords = "16"; /*свойство может быть равно "" не забудь проверить при генерации*/ 
         public string CountSymbolsInPasswords
         {
             get
@@ -24,17 +24,17 @@ namespace PWCreater.ViewModel.Windows
             {
                 try
                 {
-                    
+                    ChekStringSymbols chekStringSymbols = new ChekStringSymbols();
                     _countSymbolsInPasswords = value;
-                    if (ThisStrigIsNumber(_countSymbolsInPasswords))
+                    if (!chekStringSymbols.IsNumberSuitable(_countSymbolsInPasswords))
                     {
-                        _countSymbolsInPasswords = 1;
-                        throw new Exception("Количество символо должно быть больше нуля и меньше 32");
+                        _countSymbolsInPasswords = "";
+                        throw new Exception("Символ должен быть числом от 1 до 32");
                     }
                 }
                 catch(Exception e)
                 {
-                    //MessageBox.Show("Ошибка должна логироваться =)","Ошибка", MessageBoxButton.OK);
+                    MessageBox.Show(e.Message + "");
                 }
             }
         }
