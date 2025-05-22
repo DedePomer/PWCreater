@@ -109,6 +109,7 @@
     </Compile>
     <Compile Include="Infrastructure\Commands\Base\Command.cs" />
     <Compile Include="Infrastructure\Commands\LamdaComand.cs" />
+    <Compile Include="Infrastructure\Enums\GenerationMethodEnum.cs" />
     <Compile Include="Infrastructure\Srvices\ChekStringSymbols.cs" />
     <Compile Include="Infrastructure\Srvices\Generators\CursorStringGenerator\DataType\DotDataType.cs" />
     <Compile Include="Infrastructure\Srvices\Generators\CursorStringGenerator\DataType\RectangleZoneDataType.cs" />
@@ -154,7 +155,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Infrastructure\Enums\" />
     <Folder Include="Infrastructure\Structurs\" />
     <Folder Include="Model\" />
   </ItemGroup>

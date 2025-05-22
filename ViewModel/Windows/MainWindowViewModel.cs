@@ -47,7 +47,7 @@ namespace PWCreater.ViewModel.Windows
 
 
 
-        private int _selectedGenerationMethod = 1;
+        private int _selectedGenerationMethod = 0;
         public int SelectedGenerationMethod 
         {
             get 
