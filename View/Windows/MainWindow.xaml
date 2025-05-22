@@ -97,7 +97,7 @@
                     </StackPanel>
 
                     <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Button Content="Сгенерировать" FontSize="16" Padding="3">
+                        <Button Content="Сгенерировать" FontSize="16" Padding="3" Command="{Binding GeneratePasswordCommand}">
                         </Button>
                     </StackPanel>
 
