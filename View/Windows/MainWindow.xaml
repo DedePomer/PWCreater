@@ -68,9 +68,9 @@
                             </Grid.ColumnDefinitions>
 
                             <StackPanel Margin="0,15,15,0" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Right"  VerticalAlignment="Center">
-                                <CheckBox Content="Строчные латинские буквы (z,x,c,...)"/>
-                                <CheckBox Content="Заглавные латинские буквы (Z,X,C,...)"/>
-                                <CheckBox Content="Спец символы (!,@,#,-)"/>
+                                <CheckBox IsChecked="{Binding AddLowerLatinLetters}" Content="Строчные латинские буквы (z,x,c,...)"/>
+                                <CheckBox IsChecked="{Binding AddUpperLatinLetters}" Content="Заглавные латинские буквы (Z,X,C,...)"/>
+                                <CheckBox IsChecked="{Binding AddSpecialSymbols}" Content="Спец символы (!,@,#,-)"/>
                             </StackPanel>
 
                             <StackPanel Margin="15,15,0,0" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">

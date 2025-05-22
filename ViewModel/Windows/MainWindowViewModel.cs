@@ -39,6 +39,14 @@ namespace PWCreater.ViewModel.Windows
             }
         }
 
+
+        //варианты в CheckBOX
+        public bool AddLowerLatinLetters { get; set; }
+        public bool AddUpperLatinLetters { get; set; }
+        public bool AddSpecialSymbols { get; set; }
+
+
+
         public MainWindowViewModel()
         { 
         
