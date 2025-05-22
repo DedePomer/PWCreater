@@ -37,27 +37,24 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
         private int _countDotInSixthZone = 10;
 
 
-        public string[] GetGeneratedString(int stringCount)
+
+        public string[] GetPasswordString(int symbolCount)
         {
-            string[] dots = GetCheckedString(stringCount);
-            return GetHASHstrings(dots);
+            string[] dots = GetCheckedString(symbolCount);
+            string[] symbolString = new string[symbolCount];
+            for (int i = 0; i < symbolCount; i++)
+            {
+                GetHASHbytes(dots[i]);
+            }
         }
 
-        private string[] GetHASHstrings(string[] strings)
+        private byte[] GetHASHbytes(string generatedString)
         {
-            for (int i = 0; i < strings.Length; i++)
+            byte[] convertedString = Encoding.UTF8.GetBytes(generatedString);
+            using (SHA256 mySHA256 = SHA256.Create())
             {
-                byte[] convertedString = Encoding.UTF8.GetBytes(strings[i]);
-                using (SHA256 mySHA256 = SHA256.Create())
-                {
-                    byte[] hashs = mySHA256.ComputeHash(convertedString);
-                    foreach (byte b in hashs)
-                    {
-                        strings[i] += b.ToString("x2");
-                    }
-                }
+                return mySHA256.ComputeHash(convertedString);
             }
-            return strings;
         }
 
         private string[] GetCheckedString(int stringCount)
@@ -173,6 +170,8 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
             }
             return false;
         }
+
+
 
 
 

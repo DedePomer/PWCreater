@@ -1,22 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Interop;
 using System.Windows;
-using PWCreater.ViewModel.Base;
-using PWCreater.Infrastructure.Srvices;
 using System.Windows.Input;
 using PWCreater.Infrastructure.Commands;
+using PWCreater.Infrastructure.Srvices;
+using PWCreater.ViewModel.Base;
 
 namespace PWCreater.ViewModel.Windows
 {
     internal class MainWindowViewModel : ViewModelBase
     {
         //количество символов в пароле
-        private string _countSymbolsInPasswords = "16"; /*свойство может быть равно "" не забудь проверить при генерации*/ 
+        private string _countSymbolsInPasswords = "16"; /*свойство может быть равно "" не забудь проверить при генерации*/
         public string CountSymbolsInPasswords
         {
             get
@@ -35,7 +29,7 @@ namespace PWCreater.ViewModel.Windows
                         throw new Exception("Символ должен быть числом от 1 до 32");
                     }
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     MessageBox.Show(e.Message + "");
                 }
@@ -51,11 +45,11 @@ namespace PWCreater.ViewModel.Windows
 
         //индекс выбранного генератора
         private int _selectedGenerationMethod = 0;
-        public int SelectedGenerationMethod 
+        public int SelectedGenerationMethod
         {
-            get 
-            { 
-                return _selectedGenerationMethod; 
+            get
+            {
+                return _selectedGenerationMethod;
             }
             set
             {

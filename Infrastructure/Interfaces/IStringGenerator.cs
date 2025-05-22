@@ -2,7 +2,7 @@
 {
     public interface IStringGenerator
     {
-        public string[] GetGeneratedString(int stringCount);
+        public string[] GetPasswordString(int symbolCount);
 
     }
 }

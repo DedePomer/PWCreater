@@ -116,10 +116,10 @@
     <Compile Include="Infrastructure\Srvices\Generators\CursorStringGenerator\DataType\ScreenResolutionDataType.cs" />
     <Compile Include="Infrastructure\Srvices\Generators\CursorStringGenerator\Enums\DeviceCapEnum.cs" />
     <Compile Include="Infrastructure\Interfaces\IStringGenerator.cs" />
-    <Compile Include="Infrastructure\Interfaces\ISymbolCreater.cs" />
     <Compile Include="Infrastructure\Srvices\Generators\AudioStringGenrator\AudioStringGenerator.cs" />
     <Compile Include="Infrastructure\Srvices\Generators\CursorStringGenerator\PositionStringGenerator.cs" />
     <Compile Include="Infrastructure\Srvices\Generators\CursorStringGenerator\Structurs\PointStruct.cs" />
+    <Compile Include="Infrastructure\Srvices\Generators\PasswordGenerator.cs" />
     <Compile Include="ViewModel\Base\ViewModelBase.cs" />
     <Compile Include="ViewModel\Windows\MainWindowViewModel.cs" />
     <Compile Include="View\Windows\MainWindow.xaml.cs">
