@@ -9,7 +9,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators
 
 
 
-        public string GeneratePasswordFromByte(byte[] hashBytes, int passwordLength)
+        public string GeneratePasswordFromByte(byte[] hashBytes, int passwordLength) /*надо сделать свой тип данных для ChekBox-ов и добавить сюда*/ 
         {
             const string charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}";
 
