@@ -47,6 +47,21 @@ namespace PWCreater.ViewModel.Windows
 
 
 
+        private int _selectedGenerationMethod = 1;
+        public int SelectedGenerationMethod 
+        {
+            get 
+            { 
+                return _selectedGenerationMethod; 
+            }
+            set
+            {
+                _selectedGenerationMethod = value;
+            }
+        }
+
+
+
         public MainWindowViewModel()
         { 
         
