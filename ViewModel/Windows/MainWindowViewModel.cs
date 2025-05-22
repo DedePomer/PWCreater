@@ -8,11 +8,14 @@ using System.Windows.Interop;
 using System.Windows;
 using PWCreater.ViewModel.Base;
 using PWCreater.Infrastructure.Srvices;
+using System.Windows.Input;
+using PWCreater.Infrastructure.Commands;
 
 namespace PWCreater.ViewModel.Windows
 {
     internal class MainWindowViewModel : ViewModelBase
     {
+        //количество символов в пароле
         private string _countSymbolsInPasswords = "16"; /*свойство может быть равно "" не забудь проверить при генерации*/ 
         public string CountSymbolsInPasswords
         {
@@ -46,7 +49,7 @@ namespace PWCreater.ViewModel.Windows
         public bool AddSpecialSymbols { get; set; }
 
 
-
+        //индекс выбранного генератора
         private int _selectedGenerationMethod = 0;
         public int SelectedGenerationMethod 
         {
@@ -60,11 +63,41 @@ namespace PWCreater.ViewModel.Windows
             }
         }
 
+        //сгенерированный пароль
+        private string _passwordString = "457";
+        public string PasswordString
+        {
+            get
+            {
+                return _passwordString;
+            }
+            set
+            {
+                _passwordString = value;
+            }
+        }
 
+
+
+        //команды
+        public ICommand CopyPasswordCommand { get; }
+        private void OnCopyPasswordExecuted(object p)
+        {
+            Clipboard.SetData(DataFormats.Text, (Object)_passwordString);
+        }
+        private bool CanCopyPasswordExecuted(object p) => true;
+
+        public ICommand GeneratePasswordCommand { get; }
+        private void OnGeneratePasswordExecuted(object p)
+        {
+
+        }
+        private bool CanGeneratePasswordExecuted(object p) => true;
 
         public MainWindowViewModel()
-        { 
-        
+        {
+            GeneratePasswordCommand = new LamdaCommand(OnGeneratePasswordExecuted, CanGeneratePasswordExecuted);
+            CopyPasswordCommand = new LamdaCommand(OnCopyPasswordExecuted, CanCopyPasswordExecuted);
         }
 
 
