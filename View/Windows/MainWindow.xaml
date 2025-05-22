@@ -82,7 +82,7 @@
                         <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15">
                             <Label Content="Способ генерации: "/>
                             <ComboBox Width="200">
-                                <ComboBoxItem>Звуковая карта</ComboBoxItem>
+                                <ComboBoxItem >Звуковая карта</ComboBoxItem>
                                 <ComboBoxItem>Движение мыши</ComboBoxItem>
                             </ComboBox>
                         </StackPanel>
@@ -91,7 +91,7 @@
 
                     <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBox FontSize="16" TextAlignment="Center"  Width="400" Text="123" IsReadOnly="True" />
-                        <Button FontSize="16" ToolTip="Копировать">
+                        <Button FontSize="16" ToolTip="Копировать" Click="Button_Click">
                             <fa:FontAwesome Icon="Copy" Margin="2"/>
                         </Button>
                     </StackPanel>
