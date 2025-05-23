@@ -20,7 +20,6 @@
 
     <Window.Resources>
         <ResourceDictionary Source="/Data/ResourceDictionary/NormalDictionary.xaml"/>
-        
     </Window.Resources>
 
 
@@ -69,10 +68,10 @@
                                 <ColumnDefinition MinWidth="240"/>
                             </Grid.ColumnDefinitions>
 
-                            <StackPanel DataContext="{Binding Path = Alphabet}"  Margin="0,15,15,0" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Right"  VerticalAlignment="Center">
-                                <CheckBox  IsChecked="{Binding LowerLatinLetters}" Content="Строчные латинские буквы (z,x,c,...)"/>
-                                <!--<CheckBox IsChecked="{Binding AddUpperLatinLetters}" Content="Заглавные латинские буквы (Z,X,C,...)"/>
-                                <CheckBox IsChecked="{Binding AddSpecialSymbols}" Content="Спец символы (!,@,#,-)"/>-->
+                            <StackPanel  Margin="0,15,15,0" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Right"  VerticalAlignment="Center">
+                                <CheckBox  IsChecked="{Binding Alphabet.LowerLatinLetters}" Content="Строчные латинские буквы (z,x,c,...)"/>
+                                <CheckBox IsChecked="{Binding Alphabet.UpperLatinLetters}" Content="Заглавные латинские буквы (Z,X,C,...)"/>
+                                <CheckBox IsChecked="{Binding Alphabet.SpecialSymbols}" Content="Спец символы (!,@,#,-)"/>
                             </StackPanel>
 
                             <StackPanel Margin="15,15,0,0" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">

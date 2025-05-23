@@ -1,19 +1,10 @@
-﻿namespace PWCreater.Model.UserType
+﻿using PWCreater.Model.Abstracts;
+
+namespace PWCreater.Model.UserType
 {
-    internal class SymbolAlphabet
+    public class SymbolAlphabet 
     {
-        private  bool _lowerLatinLetters = true ;
-        public bool LowerLatinLetters 
-        {
-            get 
-            {
-                return _lowerLatinLetters;
-            }
-            set 
-            {
-                _lowerLatinLetters = value;
-            }
-        }
+        public bool LowerLatinLetters { get; set; }
         public bool UpperLatinLetters { get; set; }
         public bool SpecialSymbols { get; set; }
     }
