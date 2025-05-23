@@ -1,8 +1,6 @@
-﻿using PWCreater.Model.Abstracts;
-
-namespace PWCreater.Model.UserType
+﻿namespace PWCreater.Model.UserType
 {
-    public class SymbolAlphabet 
+    public class SymbolAlphabet
     {
         public bool LowerLatinLetters { get; set; }
         public bool UpperLatinLetters { get; set; }
