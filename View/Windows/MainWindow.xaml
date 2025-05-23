@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PWCreater"
         
-         xmlns:vm="clr-namespace:PWCreater.ViewModel.Windows"
-         xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:vm="clr-namespace:PWCreater.ViewModel.Windows"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:ut="clr-namespace:PWCreater.Model.UserType"
         
         mc:Ignorable="d"          
         Title="MainWindow" 
@@ -19,6 +20,7 @@
 
     <Window.Resources>
         <ResourceDictionary Source="/Data/ResourceDictionary/NormalDictionary.xaml"/>
+        
     </Window.Resources>
 
 
@@ -67,10 +69,10 @@
                                 <ColumnDefinition MinWidth="240"/>
                             </Grid.ColumnDefinitions>
 
-                            <StackPanel Margin="0,15,15,0" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Right"  VerticalAlignment="Center">
-                                <CheckBox IsChecked="{Binding AddLowerLatinLetters}" Content="Строчные латинские буквы (z,x,c,...)"/>
-                                <CheckBox IsChecked="{Binding AddUpperLatinLetters}" Content="Заглавные латинские буквы (Z,X,C,...)"/>
-                                <CheckBox IsChecked="{Binding AddSpecialSymbols}" Content="Спец символы (!,@,#,-)"/>
+                            <StackPanel DataContext="{Binding Path = Alphabet}"  Margin="0,15,15,0" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Right"  VerticalAlignment="Center">
+                                <CheckBox  IsChecked="{Binding LowerLatinLetters}" Content="Строчные латинские буквы (z,x,c,...)"/>
+                                <!--<CheckBox IsChecked="{Binding AddUpperLatinLetters}" Content="Заглавные латинские буквы (Z,X,C,...)"/>
+                                <CheckBox IsChecked="{Binding AddSpecialSymbols}" Content="Спец символы (!,@,#,-)"/>-->
                             </StackPanel>
 
                             <StackPanel Margin="15,15,0,0" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">

@@ -23,7 +23,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators
             return password.ToString();
         }
 
-        private GenerationMethodEnum
+        //private GenerationMethodEnum
 
     }
 }

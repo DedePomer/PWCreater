@@ -4,6 +4,7 @@ using System.Windows.Input;
 using PWCreater.Infrastructure.Commands;
 using PWCreater.Infrastructure.Srvices;
 using PWCreater.ViewModel.Base;
+using PWCreater.Model.UserType;
 
 namespace PWCreater.ViewModel.Windows
 {
@@ -38,9 +39,10 @@ namespace PWCreater.ViewModel.Windows
 
 
         //варианты в CheckBOX
-        public bool AddLowerLatinLetters { get; set; }
-        public bool AddUpperLatinLetters { get; set; }
-        public bool AddSpecialSymbols { get; set; }
+        public SymbolAlphabet Alphabet { get; set; }
+        //public bool AddLowerLatinLetters { get; set; }
+        //public bool AddUpperLatinLetters { get; set; }
+        //public bool AddSpecialSymbols { get; set; }
 
 
         //индекс выбранного генератора
@@ -84,7 +86,7 @@ namespace PWCreater.ViewModel.Windows
         public ICommand GeneratePasswordCommand { get; }
         private void OnGeneratePasswordExecuted(object p)
         {
-
+            bool b = Alphabet.LowerLatinLetters;
         }
         private bool CanGeneratePasswordExecuted(object p) => true;
 

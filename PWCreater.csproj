@@ -120,6 +120,7 @@
     <Compile Include="Infrastructure\Srvices\Generators\CursorStringGenerator\PositionStringGenerator.cs" />
     <Compile Include="Infrastructure\Srvices\Generators\CursorStringGenerator\Structurs\PointStruct.cs" />
     <Compile Include="Infrastructure\Srvices\Generators\PasswordGenerator.cs" />
+    <Compile Include="Model\UserType\SymbolAlphabet.cs" />
     <Compile Include="ViewModel\Base\ViewModelBase.cs" />
     <Compile Include="ViewModel\Windows\MainWindowViewModel.cs" />
     <Compile Include="View\Windows\MainWindow.xaml.cs">
@@ -156,7 +157,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Infrastructure\Structurs\" />
-    <Folder Include="Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
