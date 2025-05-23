@@ -16,7 +16,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators
         public string GeneratePasswordFromByte(byte[] hashBytes, int passwordLength, SymbolAlphabet symbol) 
         {          
             string alphabet = AlphabetCreater(symbol);
-            StringBuilder password = new StringBuilder();
+            StringBuilder password = new StringBuilder(passwordLength);
 
             for (int i = 0; i < passwordLength; i++)
             {
