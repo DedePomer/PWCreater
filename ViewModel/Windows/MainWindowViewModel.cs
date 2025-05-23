@@ -5,6 +5,7 @@ using PWCreater.Infrastructure.Commands;
 using PWCreater.Infrastructure.Srvices;
 using PWCreater.ViewModel.Base;
 using PWCreater.Model.UserType;
+using PWCreater.Infrastructure.Enums;
 
 namespace PWCreater.ViewModel.Windows
 {
@@ -92,12 +93,32 @@ namespace PWCreater.ViewModel.Windows
         }
         private bool CanCopyPasswordExecuted(object p) => true;
 
+        #region GeneratePasswordCommand
         public ICommand GeneratePasswordCommand { get; }
         private void OnGeneratePasswordExecuted(object p)
         {
-            
+            ChekStringSymbols chekStringSymbols = new ChekStringSymbols();
+            if (chekStringSymbols.IsNumberSuitable(_countSymbolsInPasswords) && _selectedGenerationMethod >= 0)
+            {
+                ChoiceGenerationMethod(_selectedGenerationMethod, _alphabet);
+            }
         }
         private bool CanGeneratePasswordExecuted(object p) => true;
+
+        private void ChoiceGenerationMethod(int index, SymbolAlphabet symbol)
+        {
+            GenerationMethodEnum generationMethodEnum = (GenerationMethodEnum)_selectedGenerationMethod;
+            switch (generationMethodEnum)
+            {
+                case GenerationMethodEnum.AudioGenerator:
+                    /*генератор*/
+                    break;
+                case GenerationMethodEnum.CursorGenerator:
+                    /*генератор*/
+                    break;
+            }
+        }
+        #endregion
 
         public MainWindowViewModel()
         {
@@ -105,7 +126,7 @@ namespace PWCreater.ViewModel.Windows
             CopyPasswordCommand = new LamdaCommand(OnCopyPasswordExecuted, CanCopyPasswordExecuted);
         }
 
-
+       
 
     }
 }
