@@ -74,6 +74,8 @@
                                 <CheckBox IsChecked="{Binding Alphabet.SpecialSymbols}" Content="Спец символы (!,@,#,-)"/>
                             </StackPanel>
 
+                            
+                            <!--добавить слайдер вместо textBox--> 
                             <StackPanel Margin="15,15,0,0" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
                                 <Label Content="Количество символов (1-32):"/>
                                 <TextBox Text="{Binding CountSymbolsInPasswords, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
