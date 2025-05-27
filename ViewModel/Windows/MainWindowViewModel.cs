@@ -80,7 +80,7 @@ namespace PWCreater.ViewModel.Windows
             }
             set
             {
-                _passwordString = value;
+                Set(ref _passwordString, value);
             }
         }
 
@@ -121,6 +121,7 @@ namespace PWCreater.ViewModel.Windows
                 case GenerationMethodEnum.CursorGenerator:
                     PositionStringGenerator positionStringGenerator = new PositionStringGenerator();
                     PasswordString = positionStringGenerator.GetPasswordString(stringToInt.ConvertStringToInt(_countSymbolsInPasswords), _alphabet);
+                    MessageBox.Show("всё");
                     break;
             }
          

@@ -10,6 +10,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using PWCreater.Infrastructure.Srvices.Generators;
+using System.Windows.Media;
 
 namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
 {
@@ -44,20 +45,23 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
         {
             PasswordGenerator passwordGenerator = new PasswordGenerator();
             string[] dots = GetCheckedString(symbolCount);
-            return passwordGenerator.GeneratePasswordFromByte(GetHASHbytes(dots), symbolCount, symbolAlphabet);
+            string allDots = "";
+            for (int i = 0; i < dots.Length; i++)
+            {
+                allDots += dots[i];
+            }   
+            return passwordGenerator.GeneratePasswordFromByte(GetHASHbytes(allDots), symbolCount, symbolAlphabet);
         }
 
-        private byte[] GetHASHbytes(string[] generatedStrings)
+        private byte[] GetHASHbytes(string generatedString)
         {
-            byte[] hashByte = new byte[generatedStrings.Length];
-            for (int i = 0; i < generatedStrings.Length; i++)
+            byte[] hashByte = new byte[generatedString.Length];
+            byte[] convertedString = Encoding.UTF8.GetBytes(generatedString);
+            using (SHA256 mySHA256 = SHA256.Create())
             {
-                byte[] convertedString = Encoding.UTF8.GetBytes(generatedStrings[i]);
-                using (SHA256 mySHA256 = SHA256.Create())
-                {
-                    hashByte = mySHA256.ComputeHash(convertedString);
-                }
+                hashByte = mySHA256.ComputeHash(convertedString);
             }
+            
             return hashByte;
         }
 
