@@ -6,6 +6,7 @@ using PWCreater.Infrastructure.Srvices;
 using PWCreater.ViewModel.Base;
 using PWCreater.Model.UserType;
 using PWCreater.Infrastructure.Enums;
+using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator;
 
 namespace PWCreater.ViewModel.Windows
 {
@@ -107,16 +108,22 @@ namespace PWCreater.ViewModel.Windows
 
         private void ChoiceGenerationMethod(int index, SymbolAlphabet symbol)
         {
+
             GenerationMethodEnum generationMethodEnum = (GenerationMethodEnum)_selectedGenerationMethod;
+            StringToInt stringToInt = new StringToInt();
+
+
             switch (generationMethodEnum)
             {
                 case GenerationMethodEnum.AudioGenerator:
                     /*генератор*/
                     break;
                 case GenerationMethodEnum.CursorGenerator:
-                    /*генератор*/
+                    PositionStringGenerator positionStringGenerator = new PositionStringGenerator();
+                    PasswordString = positionStringGenerator.GetPasswordString(stringToInt.ConvertStringToInt(_countSymbolsInPasswords), _alphabet);
                     break;
             }
+         
         }
         #endregion
 
