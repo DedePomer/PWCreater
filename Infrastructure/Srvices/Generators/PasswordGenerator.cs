@@ -7,14 +7,15 @@ namespace PWCreater.Infrastructure.Srvices.Generators
 {
     public class PasswordGenerator
     {
-        private const string NumberAlphabet = "123456789";
+        private const string NumberAlphabet = "1234567890";
         private const string LowerLatinLettersAlphabet = "abcdefghijklmnopqrstuvwxyz";
         private const string UpperLatinLettersAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private const string SpecialSymbolsAlphabet = "!@#-";
 
 
         public string GeneratePasswordFromByte(byte[] hashBytes, int passwordLength, SymbolAlphabet symbol) 
-        {          
+        {
+            RandomNumberGenerator rng = RandomNumberGenerator.Create();
             string alphabet = AlphabetCreater(symbol);
             StringBuilder password = new StringBuilder(passwordLength);
 
@@ -23,6 +24,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators
                 int index = hashBytes[i % hashBytes.Length] % alphabet.Length;
                 password.Append(alphabet[index]);
             }
+
 
             return password.ToString();
         }
