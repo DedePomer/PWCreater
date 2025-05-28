@@ -10,13 +10,14 @@ namespace PWCreater.Infrastructure.Srvices.Generators
         private const string NumberAlphabet = "1234567890";
         private const string LowerLatinLettersAlphabet = "abcdefghijklmnopqrstuvwxyz";
         private const string UpperLatinLettersAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        private const string SpecialSymbolsAlphabet = "!@#-";
+        private const string SpecialSymbolsAlphabet = "!!!!!!!@@@@@@@@#-";
 
         private const int CountByetsOnSha256 = 32;
 
 
         public string GeneratePasswordFromByte(byte[,] hashBytes, int passwordLength, SymbolAlphabet symbol) 
         {
+            RandomNumberGenerator randomNumberGenerator = RandomNumberGenerator.Create();
             string alphabet = AlphabetCreater(symbol);
             StringBuilder password = new StringBuilder(passwordLength);
 
@@ -28,7 +29,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators
                     averageByte += hashBytes[i, y];
                 }
                 averageByte /= CountByetsOnSha256;
-                int index = averageByte /*hashBytes[i, 0 % CountByetsOnSha256]*/ % alphabet.Length;
+                int index = /*averageByte*/ hashBytes[i, 0 % CountByetsOnSha256] % alphabet.Length;
                 password.Append(alphabet[index]);
 
             }
