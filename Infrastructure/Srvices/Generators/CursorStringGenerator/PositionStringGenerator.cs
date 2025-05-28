@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading;
 using PWCreater.Infrastructure.Srvices.Generators;
 using System.Windows.Media;
+using System.Windows.Documents;
+using System.Collections.Generic;
 
 namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
 {
@@ -24,6 +26,8 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
         private const float TwoThrids = 0.67f;
         private const float Unit = 1f;
         private const float Zero = 0f;
+
+        private const int CountByetsOnSha256 = 32;
 
 
         [DllImport("user32.dll")]
@@ -45,43 +49,50 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
         {
             PasswordGenerator passwordGenerator = new PasswordGenerator();
             string[] dots = GetCheckedString(symbolCount);
-            string allDots = "";
-            for (int i = 0; i < dots.Length; i++)
-            {
-                allDots += dots[i];
-            }   
-            return passwordGenerator.GeneratePasswordFromByte(GetHASHbytes(allDots), symbolCount, symbolAlphabet);
+            return passwordGenerator.GeneratePasswordFromByte(GetHASHbytes(dots), symbolCount, symbolAlphabet);
         }
 
-        private byte[] GetHASHbytes(string generatedString)
+        private byte[,] GetHASHbytes(string[] generatedString)
         {
-            byte[] hashByte = new byte[generatedString.Length];
-            byte[] convertedString = Encoding.UTF8.GetBytes(generatedString);
-            using (SHA256 mySHA256 = SHA256.Create())
+            byte[,] hashByte = new byte[generatedString.Length, CountByetsOnSha256];
+            for (int i = 0; i < generatedString.Length; i++)
             {
-                hashByte = mySHA256.ComputeHash(convertedString);
+                byte[] convertedString = Encoding.UTF8.GetBytes(generatedString[i]);
+                using (SHA256 mySHA256 = SHA256.Create())
+                {
+                    byte[] computeBytes = mySHA256.ComputeHash(convertedString);
+                    for (int y = 0; y < CountByetsOnSha256; y++)
+                    {
+                        hashByte[i, y] = computeBytes[y];
+                    }                 
+                }
             }
+
             
             return hashByte;
         }
 
         private string[] GetCheckedString(int stringCount)
         {
-            string[] dots = new string[stringCount];
+            string[] dots;
+            List<string> listDots = new List<string>();
             int x = 0, y = 0;
 
-            for (int i = 0; i < dots.Length; i++)
+            while(listDots.Count != stringCount)
             {
                 PointStruct point;
                 if (GetCursorPos(out point) && point.X != x && point.Y != y
                     && IsChangedCountDotsInZone(new DotDataType() { X = point.X, Y = point.Y }))
                 {
-                    dots[i] = point.X + "" + point.Y;
+                    listDots.Add(point.X + "" + point.Y);
                     x = point.X;
                     y = point.Y;
                 }
                 Thread.Sleep(300);
             }
+
+            dots = listDots.ToArray();
+
 
             return dots;
         }

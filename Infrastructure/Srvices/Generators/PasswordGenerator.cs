@@ -12,19 +12,26 @@ namespace PWCreater.Infrastructure.Srvices.Generators
         private const string UpperLatinLettersAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private const string SpecialSymbolsAlphabet = "!@#-";
 
+        private const int CountByetsOnSha256 = 32;
 
-        public string GeneratePasswordFromByte(byte[] hashBytes, int passwordLength, SymbolAlphabet symbol) 
+
+        public string GeneratePasswordFromByte(byte[,] hashBytes, int passwordLength, SymbolAlphabet symbol) 
         {
-            RandomNumberGenerator rng = RandomNumberGenerator.Create();
             string alphabet = AlphabetCreater(symbol);
             StringBuilder password = new StringBuilder(passwordLength);
 
             for (int i = 0; i < passwordLength; i++)
             {
-                int index = hashBytes[i % hashBytes.Length] % alphabet.Length;
+                int averageByte = 0;
+                for (int y = 0; y < CountByetsOnSha256; y++)
+                {
+                    averageByte += hashBytes[i, y];
+                }
+                averageByte /= CountByetsOnSha256;
+                int index = averageByte /*hashBytes[i, 0 % CountByetsOnSha256]*/ % alphabet.Length;
                 password.Append(alphabet[index]);
-            }
 
+            }
 
             return password.ToString();
         }
