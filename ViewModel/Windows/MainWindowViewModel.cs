@@ -12,6 +12,7 @@ namespace PWCreater.ViewModel.Windows
 {
     internal class MainWindowViewModel : ViewModelBase
     {
+        //максимальная и минимальная длина пароля
         public int MaximumSymbols
         {
             get { return 32; }
@@ -21,7 +22,7 @@ namespace PWCreater.ViewModel.Windows
             get { return 8; }
         }
 
-
+        //количество символов в пароле
         private int _countSymbols = 16;
         public int CountSymbols
         { 
@@ -29,32 +30,6 @@ namespace PWCreater.ViewModel.Windows
             set { Set(ref _countSymbols, value); }
         }
 
-        //количество символов в пароле
-        private string _countSymbolsInPasswords = "16"; /*свойство может быть равно "" не забудь проверить при генерации*/
-        public string CountSymbolsInPasswords
-        {
-            get
-            {
-                return _countSymbolsInPasswords;
-            }
-            set
-            {
-                try
-                {
-                    ChekStringSymbols chekStringSymbols = new ChekStringSymbols();
-                    _countSymbolsInPasswords = value;
-                    if (!chekStringSymbols.IsNumberSuitable(_countSymbolsInPasswords))
-                    {
-                        _countSymbolsInPasswords = "";
-                        throw new Exception("Символ должен быть числом от 1 до 32");
-                    }
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.Message + "");
-                }
-            }
-        }
 
 
         //варианты в CheckBOX
@@ -115,8 +90,8 @@ namespace PWCreater.ViewModel.Windows
         public ICommand GeneratePasswordCommand { get; }
         private void OnGeneratePasswordExecuted(object p)
         {
-            ChekStringSymbols chekStringSymbols = new ChekStringSymbols();
-            if (chekStringSymbols.IsNumberSuitable(_countSymbolsInPasswords) && _selectedGenerationMethod >= 0)
+
+            if (_selectedGenerationMethod >= 0)
             {
                 ChoiceGenerationMethod(_selectedGenerationMethod, _alphabet);
             }
@@ -137,7 +112,7 @@ namespace PWCreater.ViewModel.Windows
                     break;
                 case GenerationMethodEnum.CursorGenerator:
                     PositionStringGenerator positionStringGenerator = new PositionStringGenerator();
-                    PasswordString = positionStringGenerator.GetPasswordString(stringToInt.ConvertStringToInt(_countSymbolsInPasswords), _alphabet);
+                    PasswordString = positionStringGenerator.GetPasswordString(_countSymbols, _alphabet);
                     MessageBox.Show("всё");
                     break;
             }

@@ -114,7 +114,6 @@
     <Compile Include="Infrastructure\Commands\Base\Command.cs" />
     <Compile Include="Infrastructure\Commands\LamdaComand.cs" />
     <Compile Include="Infrastructure\Enums\GenerationMethodEnum.cs" />
-    <Compile Include="Infrastructure\Srvices\ChekStringSymbols.cs" />
     <Compile Include="Infrastructure\Srvices\Generators\CursorStringGenerator\DataType\DotDataType.cs" />
     <Compile Include="Infrastructure\Srvices\Generators\CursorStringGenerator\DataType\RectangleZoneDataType.cs" />
     <Compile Include="Infrastructure\Srvices\Generators\CursorStringGenerator\DataType\ScreenResolutionDataType.cs" />
@@ -124,7 +123,6 @@
     <Compile Include="Infrastructure\Srvices\Generators\CursorStringGenerator\PositionStringGenerator.cs" />
     <Compile Include="Infrastructure\Srvices\Generators\CursorStringGenerator\Structurs\PointStruct.cs" />
     <Compile Include="Infrastructure\Srvices\Generators\PasswordGenerator.cs" />
-    <Compile Include="Infrastructure\Srvices\StringToInt.cs" />
     <Compile Include="Model\UserType\SymbolAlphabet.cs" />
     <Compile Include="ViewModel\Base\ViewModelBase.cs" />
     <Compile Include="ViewModel\Windows\MainWindowViewModel.cs" />
