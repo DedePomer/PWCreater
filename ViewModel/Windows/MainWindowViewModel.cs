@@ -102,7 +102,6 @@ namespace PWCreater.ViewModel.Windows
         {
 
             GenerationMethodEnum generationMethodEnum = (GenerationMethodEnum)_selectedGenerationMethod;
-            StringToInt stringToInt = new StringToInt();
 
 
             switch (generationMethodEnum)
