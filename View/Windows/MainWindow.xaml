@@ -12,7 +12,7 @@
         mc:Ignorable="d"          
         Title="MainWindow" 
         Height="450"  Width="960" 
-        MinWidth="960" MinHeight="450">
+        MinWidth="960" MinHeight="460">
 
     <Window.DataContext>
         <vm:MainWindowViewModel/>
@@ -30,6 +30,8 @@
                 <BlurEffect Radius="20"/>
             </Border.Effect>
         </Border>
+        
+        <!--данный грид разделяет центральную часть (белую) и внешюю (разноцветную)-->
         <Grid>
             
             <Grid.RowDefinitions>
@@ -92,17 +94,43 @@
 
                     </Grid>
 
-                    <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBox FontSize="16" TextAlignment="Center"  Width="400" Text="{Binding PasswordString}" IsReadOnly="True" />
-                        <Button FontSize="16" ToolTip="Копировать" Command="{Binding CopyPasswordCommand}">
-                            <fa:FontAwesome Icon="Copy" Margin="2"/>
-                        </Button>
-                    </StackPanel>
+                    <Grid Grid.Row="1">
+                        <StackPanel Margin="10 0 0 0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <Label Content="{Binding Value, ElementName=CountSymbolsSlider}"/>
+                            <Slider x:Name="CountSymbolsSlider" Width="200" Minimum="{Binding MinimumSymbols}" 
+                                    Maximum="{Binding MaximumSymbols}" Value="{Binding CountSymbols}" LargeChange="1"> </Slider>
+                        </StackPanel>
+                    </Grid>
+                    <!--блок с сгенерированным паролем и примечаниями-->
+                    <Grid Grid.Row="2">
 
-                    <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Button Content="Сгенерировать" FontSize="16" Padding="3" Command="{Binding GeneratePasswordCommand}">
-                        </Button>
-                    </StackPanel>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Label Content="В разработке" FontSize="20" Foreground="Green"/>
+                        </StackPanel>
+                        
+                        
+                        <StackPanel Grid.Column="1" Margin="0 0 20 30" HorizontalAlignment="Right" VerticalAlignment="Center">
+                            <StackPanel Margin="10" Orientation="Horizontal">
+                                <TextBox FontSize="16" TextAlignment="Center"  Width="400" Text="{Binding PasswordString}" IsReadOnly="True" />
+                                <Button FontSize="16" ToolTip="Копировать" Command="{Binding CopyPasswordCommand}">
+                                    <fa:FontAwesome Icon="Copy" Margin="2"/>
+                                </Button>
+                            </StackPanel >
+
+
+                            <StackPanel Margin="10" HorizontalAlignment="Right">
+                                <Button Width="100" Content="Сгенерировать" FontSize="16" Padding="3" Command="{Binding GeneratePasswordCommand}">
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+                        
+
+                    </Grid>
 
                 </Grid>
             </Grid>

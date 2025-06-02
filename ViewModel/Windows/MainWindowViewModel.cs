@@ -12,6 +12,23 @@ namespace PWCreater.ViewModel.Windows
 {
     internal class MainWindowViewModel : ViewModelBase
     {
+        public int MaximumSymbols
+        {
+            get { return 32; }
+        }
+        public int MinimumSymbols
+        {
+            get { return 0; }
+        }
+
+
+        private int _countSymbols = 16;
+        public int CountSymbols
+        { 
+            get { return _countSymbols; }
+            set { Set(ref _countSymbols, value); }
+        }
+
         //количество символов в пароле
         private string _countSymbolsInPasswords = "16"; /*свойство может быть равно "" не забудь проверить при генерации*/
         public string CountSymbolsInPasswords
