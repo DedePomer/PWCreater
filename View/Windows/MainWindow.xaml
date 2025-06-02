@@ -63,6 +63,10 @@
                             <ColumnDefinition MinWidth="480"/>
                             <ColumnDefinition MinWidth="480"/>
                         </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
 
                         <Grid Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right">
                             <Grid.ColumnDefinitions>
@@ -94,11 +98,14 @@
 
                     </Grid>
 
-                    <Grid Grid.Row="1">
+                    <!--блок со слайдером-->
+                    <Grid Grid.Row="1" >
                         <StackPanel Margin="10 0 0 0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                            <Label Content="{Binding Value, ElementName=CountSymbolsSlider}"/>
-                            <Slider x:Name="CountSymbolsSlider" Width="200" Minimum="{Binding MinimumSymbols}" 
-                                    Maximum="{Binding MaximumSymbols}" Value="{Binding CountSymbols}" LargeChange="1"> </Slider>
+                            <Label Width="30" FontSize="15" Content="{Binding Value, ElementName=CountSymbolsSlider}"/>
+                            <Slider x:Name="CountSymbolsSlider" Width="500" Minimum="{Binding MinimumSymbols}" 
+                                    Maximum="{Binding MaximumSymbols}" Value="{Binding CountSymbols}" LargeChange="1"
+                                    TickFrequency="4" TickPlacement="BottomRight" Foreground="OrangeRed">
+                            </Slider>
                         </StackPanel>
                     </Grid>
                     <!--блок с сгенерированным паролем и примечаниями-->
@@ -124,7 +131,7 @@
 
 
                             <StackPanel Margin="10" HorizontalAlignment="Right">
-                                <Button Width="100" Content="Сгенерировать" FontSize="16" Padding="3" Command="{Binding GeneratePasswordCommand}">
+                                <Button Width="150" Content="Сгенерировать" FontSize="16" Padding="3" Command="{Binding GeneratePasswordCommand}">
                                 </Button>
                             </StackPanel>
                         </StackPanel>

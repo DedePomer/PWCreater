@@ -18,7 +18,7 @@ namespace PWCreater.ViewModel.Windows
         }
         public int MinimumSymbols
         {
-            get { return 0; }
+            get { return 8; }
         }
 
 
