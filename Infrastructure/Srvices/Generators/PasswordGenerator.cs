@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System;
+using System.Security.Cryptography;
 using System.Text;
 using PWCreater.Infrastructure.Enums;
 using PWCreater.Model.UserType;
@@ -21,25 +22,38 @@ namespace PWCreater.Infrastructure.Srvices.Generators
             return ""; 
         }
 
+        private bool IsNumberCorrect(int number, SymbolAlphabet symbol)
+        { 
+            
+        }
+
+
         private string ChooseSymbols(SymbolAlphabet symbol)
         {
-            RandomNumberGenerator randomNumberGenerator = RandomNumberGenerator.Create();
-            switch(randomNumberGenerator.Get)
+            //не очень надёжный рандомайзер
+            Random randomNumberGenerator = new Random();
+            int randomNumber;
 
-            string alphabet = NumberAlphabet;
-            if (symbol.LowerLatinLetters)
+            do 
             {
-                alphabet += LowerLatinLettersAlphabet;
-            }
-            if (symbol.UpperLatinLetters)
+                randomNumber = randomNumberGenerator.Next(1, 6)
+            } while()
+                
+
+            switch ()
             {
-                alphabet += UpperLatinLettersAlphabet;
-            }
-            if (symbol.SpecialSymbols)
-            {
-                alphabet += SpecialSymbolsAlphabet;
-            }
-            return alphabet;
+                case 1: case 2:
+                    return LowerLatinLettersAlphabet;
+
+                case 3: case 4:
+                    return UpperLatinLettersAlphabet;
+                case 5:
+                    return NumberAlphabet;
+                case 6:
+                    return SpecialSymbolsAlphabet;
+                default:
+                    return NumberAlphabet;
+            };
         }
 
     }
