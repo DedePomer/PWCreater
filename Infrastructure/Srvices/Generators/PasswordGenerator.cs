@@ -65,7 +65,6 @@ namespace PWCreater.Infrastructure.Srvices.Generators
         //метод котырый выбирает из какого алфавита выбрать символ
         private string ChooseSymbols(SymbolAlphabet symbol)
         {
-            //не очень надёжный рандомайзер
             RandomNumberGenerator randomNumberGenerator = RandomNumberGenerator.Create();
             int randomNumber;
             byte[] randomByte = new byte[1];
@@ -77,6 +76,8 @@ namespace PWCreater.Infrastructure.Srvices.Generators
 
             } while (!IsNumberCorrect(randomNumber, symbol));
 
+
+            randomNumberGenerator.Dispose();
 
             switch (randomNumber)
             {
@@ -91,6 +92,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators
                 default:
                     return NumericalAlphabet;
             };
+            
         }
 
         //метод возвращающий пароль
@@ -98,15 +100,18 @@ namespace PWCreater.Infrastructure.Srvices.Generators
         {
             StringBuilder password = new StringBuilder(passwordLength);
             string alphabet;
-            Random randomNumberGenerator = new Random();
+
+            RandomNumberGenerator randomNumberGenerator = RandomNumberGenerator.Create();
+            byte[] metaIndex = new byte[1];
 
             for (int i = 0; i < passwordLength; i++)
             {
-                int metaIndex = randomNumberGenerator.Next(1, CountByetsOnSha256);
+                randomNumberGenerator.GetBytes(metaIndex);
                 alphabet = ChooseSymbols(symbol);
-                int index = hsahBytes[i, metaIndex] % alphabet.Length;
+                int index = hsahBytes[i, metaIndex[0] % CountByetsOnSha256] % alphabet.Length;
                 password.Append(alphabet[index]);
             }
+            randomNumberGenerator.Dispose();
             return password;
         }
 
