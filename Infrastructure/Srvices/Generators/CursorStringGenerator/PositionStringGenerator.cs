@@ -67,7 +67,6 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
                     }                 
                 }
             }
-
             
             return hashByte;
         }

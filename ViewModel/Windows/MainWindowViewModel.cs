@@ -48,7 +48,7 @@ namespace PWCreater.ViewModel.Windows
 
 
 
-        //индекс выбранного генератора
+        //индекс выбранного способа генерации
         private int _selectedGenerationMethod = 0;
         public int SelectedGenerationMethod
         {
