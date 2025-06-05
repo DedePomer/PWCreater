@@ -25,27 +25,25 @@ namespace PWCreater.Infrastructure.Srvices.Generators
 
         public string GeneratePassword (int passwordLength, SymbolAlphabet symbol, GenerationMethodEnum generationMethod) 
         {
-
-            StringBuilder password = GetPassword(, symbol, passwordLength);
-            return ""; 
+            byte[,] hashBytes = SelectGenerationMethod(passwordLength, symbol, generationMethod);
+            StringBuilder password = GetPassword(hashBytes, symbol, passwordLength);
+            return password.ToString(); 
         }
 
-        private byte[,] SelectGenerationMethod(GenerationMethodEnum generationMethod)
+        private byte[,] SelectGenerationMethod(int passwordLength, SymbolAlphabet symbol, GenerationMethodEnum generationMethod)
         {
-            byte[,] hashBytes;
             PositionStringGenerator positionStringGenerator = new PositionStringGenerator();
             //AudioStringGenrator audioStringGenrator = new AudioStringGenrator();
+            byte[,] hashBytes = { };
             switch (generationMethod)
             {
                 case GenerationMethodEnum.AudioGenerator:
                     //в разоаботке
-                    break;
+                    return hashBytes;
                 case GenerationMethodEnum.CursorGenerator:
-
-                    break;
+                    return positionStringGenerator.GetPasswordBytes(passwordLength, symbol);
                 default:
-
-                    break;
+                    return hashBytes;
             }
         }
 
