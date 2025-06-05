@@ -4,7 +4,7 @@ namespace PWCreater.Infrastructure.Interfaces
 {
     public interface IStringGenerator
     {
-        public string GetPasswordString(int symbolCount, SymbolAlphabet symbolAlphabet);
+        public byte[,] GetPasswordBytes(int symbolCount, SymbolAlphabet symbolAlphabet);
 
     }
 }

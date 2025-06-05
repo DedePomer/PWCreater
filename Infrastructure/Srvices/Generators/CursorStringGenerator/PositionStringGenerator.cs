@@ -45,11 +45,11 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
 
 
 
-        public string GetPasswordString(int symbolCount, SymbolAlphabet symbolAlphabet)
+        public byte[,] GetPasswordBytes(int symbolCount, SymbolAlphabet symbolAlphabet)
         {
             PasswordGenerator passwordGenerator = new PasswordGenerator();
             string[] dots = GetCheckedString(symbolCount);
-            return passwordGenerator.GeneratePasswordFromByte(GetHASHbytes(dots), symbolCount, symbolAlphabet);
+            return GetHASHbytes(dots);
         }
 
         private byte[,] GetHASHbytes(string[] generatedString)

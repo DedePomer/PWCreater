@@ -2,6 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 using PWCreater.Infrastructure.Enums;
+using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator;
 using PWCreater.Model.UserType;
 
 namespace PWCreater.Infrastructure.Srvices.Generators
@@ -24,6 +25,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators
 
         public string GeneratePassword (int passwordLength, SymbolAlphabet symbol, GenerationMethodEnum generationMethod) 
         {
+
             StringBuilder password = GetPassword(, symbol, passwordLength);
             return ""; 
         }
@@ -31,11 +33,12 @@ namespace PWCreater.Infrastructure.Srvices.Generators
         private byte[,] SelectGenerationMethod(GenerationMethodEnum generationMethod)
         {
             byte[,] hashBytes;
-
+            PositionStringGenerator positionStringGenerator = new PositionStringGenerator();
+            //AudioStringGenrator audioStringGenrator = new AudioStringGenrator();
             switch (generationMethod)
             {
                 case GenerationMethodEnum.AudioGenerator:
-
+                    //в разоаботке
                     break;
                 case GenerationMethodEnum.CursorGenerator:
 

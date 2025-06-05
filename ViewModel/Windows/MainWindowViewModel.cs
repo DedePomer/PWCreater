@@ -110,9 +110,9 @@ namespace PWCreater.ViewModel.Windows
                     /*генератор*/
                     break;
                 case GenerationMethodEnum.CursorGenerator:
-                    PositionStringGenerator positionStringGenerator = new PositionStringGenerator();
-                    PasswordString = positionStringGenerator.GetPasswordString(_countSymbols, _alphabet);
-                    MessageBox.Show("всё");
+                    //PositionStringGenerator positionStringGenerator = new PositionStringGenerator();
+                    //PasswordString = positionStringGenerator.GetPasswordString(_countSymbols, _alphabet);
+                    //MessageBox.Show("всё");
                     break;
             }
          
