@@ -7,6 +7,7 @@ using PWCreater.ViewModel.Base;
 using PWCreater.Model.UserType;
 using PWCreater.Infrastructure.Enums;
 using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator;
+using PWCreater.Infrastructure.Srvices.Generators;
 
 namespace PWCreater.ViewModel.Windows
 {
@@ -110,9 +111,9 @@ namespace PWCreater.ViewModel.Windows
                     /*генератор*/
                     break;
                 case GenerationMethodEnum.CursorGenerator:
-                    //PositionStringGenerator positionStringGenerator = new PositionStringGenerator();
-                    //PasswordString = positionStringGenerator.GetPasswordString(_countSymbols, _alphabet);
-                    //MessageBox.Show("всё");
+                    PasswordGenerator passwordGenerator = new PasswordGenerator();
+                    PasswordString = passwordGenerator.GeneratePassword(_countSymbols, _alphabet, generationMethodEnum);
+                    MessageBox.Show("всё");
                     break;
             }
          

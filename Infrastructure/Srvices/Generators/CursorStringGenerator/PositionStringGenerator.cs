@@ -49,7 +49,8 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
         {
             PasswordGenerator passwordGenerator = new PasswordGenerator();
             string[] dots = GetCheckedString(symbolCount);
-            return GetHASHbytes(dots);
+            byte[,] passwordBytes = GetHASHbytes(dots);
+            return passwordBytes;
         }
 
         private byte[,] GetHASHbytes(string[] generatedString)

@@ -12,7 +12,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators
         private const string NumericalAlphabet = "1234567890";
         private const string LowerLatinLettersAlphabet = "abcdefghijklmnopqrstuvwxyz";
         private const string UpperLatinLettersAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        private const string SpecialSymbolsAlphabet = "!!!!@@@@@#-";
+        private const string SpecialSymbolsAlphabet = "!@#-";
 
         private const int NumberOfNumericalAlphabet = 5;
         private const int NumberOfLowerLatinLettersAlphabet = 1;
@@ -66,14 +66,17 @@ namespace PWCreater.Infrastructure.Srvices.Generators
         private string ChooseSymbols(SymbolAlphabet symbol)
         {
             //не очень надёжный рандомайзер
-            Random randomNumberGenerator = new Random();
+            RandomNumberGenerator randomNumberGenerator = RandomNumberGenerator.Create();
             int randomNumber;
+            byte[] randomByte = new byte[1];
 
             do
             {
-                randomNumber = randomNumberGenerator.Next(1, 6);
-            } while (IsNumberCorrect(randomNumber, symbol));
-                
+                randomNumberGenerator.GetBytes(randomByte);
+                randomNumber = randomByte[0] % 7 ;
+
+            } while (!IsNumberCorrect(randomNumber, symbol));
+
 
             switch (randomNumber)
             {
@@ -95,14 +98,14 @@ namespace PWCreater.Infrastructure.Srvices.Generators
         {
             StringBuilder password = new StringBuilder(passwordLength);
             string alphabet;
+            Random randomNumberGenerator = new Random();
+
             for (int i = 0; i < passwordLength; i++)
             {
-                for (int o = 0; o < CountByetsOnSha256; o++)
-                {
-                    alphabet = ChooseSymbols(symbol);
-                    int index = hsahBytes[i, o % CountByetsOnSha256] % alphabet.Length;
-                    password.Append(alphabet[index]);
-                }
+                int metaIndex = randomNumberGenerator.Next(1, CountByetsOnSha256);
+                alphabet = ChooseSymbols(symbol);
+                int index = hsahBytes[i, metaIndex] % alphabet.Length;
+                password.Append(alphabet[index]);
             }
             return password;
         }
