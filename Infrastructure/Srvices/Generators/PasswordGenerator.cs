@@ -48,6 +48,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators
             }
         }
 
+        //метод проверяет равен ли number элементу массива
         private bool IsConstArrayCorrect(int number, bool alphabet, int[] numberArrey)
         {
             for (int i = 0; i < numberArrey.Length; i++)
