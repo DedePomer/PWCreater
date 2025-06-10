@@ -14,14 +14,14 @@ namespace PWCreater.Infrastructure.Srvices.Generators
         private const string UpperLatinLettersAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private const string SpecialSymbolsAlphabet = "!@#-";
 
-        private const int NumberOfNumericalAlphabet = 5;
-        private const int NumberOfLowerLatinLettersAlphabet = 1;
-        private const int NumberOfUpperLatinLettersAlphabet = 3;
-        private const int NumberOfSpecialSymbolsAlphabet = 6;
+        private readonly int[] NumberOfNumericalAlphabet = {5};
+        private readonly int[] NumberOfLowerLatinLettersAlphabet = { 1,2 };
+        private readonly int[] NumberOfUpperLatinLettersAlphabet = { 3,4 };
+        private readonly int[] NumberOfSpecialSymbolsAlphabet = { 6 };
 
         private const int CountByetsOnSha256 = 32;
 
-        //int index = /*averageByte*/ hashBytes[i, 0 % CountByetsOnSha256] % alphabet.Length;
+        
 
         public string GeneratePassword (int passwordLength, SymbolAlphabet symbol, GenerationMethodEnum generationMethod) 
         {
@@ -30,6 +30,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators
             return password.ToString(); 
         }
 
+        //метод для выбора способа генерации
         private byte[,] SelectGenerationMethod(int passwordLength, SymbolAlphabet symbol, GenerationMethodEnum generationMethod)
         {
             PositionStringGenerator positionStringGenerator = new PositionStringGenerator();
@@ -47,16 +48,28 @@ namespace PWCreater.Infrastructure.Srvices.Generators
             }
         }
 
+        private bool IsConstArrayCorrect(int number, bool alphabet, int[] numberArrey)
+        {
+            for (int i = 0; i < numberArrey.Length; i++)
+            {
+                if (number == numberArrey[i] && alphabet == true)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         //проверяет сгенерированное число
         private bool IsNumberCorrect(int number, SymbolAlphabet symbol)
         {
-            if (number == NumberOfNumericalAlphabet)
+            if (number == NumberOfNumericalAlphabet[0])
                 return true;
-            else if (number == NumberOfSpecialSymbolsAlphabet && symbol.SpecialSymbols == true)
+            else if (IsConstArrayCorrect(number, symbol.SpecialSymbols, NumberOfSpecialSymbolsAlphabet))
                 return true;
-            else if ((number == NumberOfLowerLatinLettersAlphabet || number == NumberOfLowerLatinLettersAlphabet + 1) && symbol.LowerLatinLetters == true)
+            else if (IsConstArrayCorrect(number, symbol.UpperLatinLetters, NumberOfUpperLatinLettersAlphabet))
                 return true;
-            else if ((number == NumberOfUpperLatinLettersAlphabet || number == NumberOfUpperLatinLettersAlphabet + 1) && symbol.UpperLatinLetters == true)
+            else if (IsConstArrayCorrect(number, symbol.LowerLatinLetters, NumberOfLowerLatinLettersAlphabet))
                 return true;
             else
                 return false;
