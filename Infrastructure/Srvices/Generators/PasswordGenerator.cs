@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using PWCreater.Infrastructure.Enums;
 using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator;
 using PWCreater.Model.UserType;
@@ -25,27 +26,29 @@ namespace PWCreater.Infrastructure.Srvices.Generators
 
         public string GeneratePassword (int passwordLength, SymbolAlphabet symbol, GenerationMethodEnum generationMethod) 
         {
-            byte[,] hashBytes = SelectGenerationMethod(passwordLength, symbol, generationMethod);
+            byte[,] hashBytes = SelectGenerationMethodAsync(passwordLength, symbol, generationMethod).Result;
             StringBuilder password = GetPassword(hashBytes, symbol, passwordLength);
             return password.ToString(); 
         }
 
         //метод для выбора способа генерации
-        private byte[,] SelectGenerationMethod(int passwordLength, SymbolAlphabet symbol, GenerationMethodEnum generationMethod)
+        private async Task<byte[,]> SelectGenerationMethodAsync(int passwordLength, SymbolAlphabet symbol, GenerationMethodEnum generationMethod)
         {
-            PositionStringGenerator positionStringGenerator = new PositionStringGenerator();
-            //AudioStringGenrator audioStringGenrator = new AudioStringGenrator();
             byte[,] hashBytes = { };
+            PositionStringGenerator positionStringGenerator = new PositionStringGenerator();
+            //AudioStringGenrator audioStringGenrator = new AudioStringGenrator();              
             switch (generationMethod)
             {
                 case GenerationMethodEnum.AudioGenerator:
                     //в разоаботке
-                    return hashBytes;
+                    break;
                 case GenerationMethodEnum.CursorGenerator:
-                    return positionStringGenerator.GetPasswordBytes(passwordLength, symbol);
+                    hashBytes = await positionStringGenerator.GetPasswordBytes(passwordLength, symbol);
+                    break;
                 default:
-                    return hashBytes;
+                    break;
             }
+            return hashBytes;
         }
 
         //метод проверяет равен ли number элементу массива

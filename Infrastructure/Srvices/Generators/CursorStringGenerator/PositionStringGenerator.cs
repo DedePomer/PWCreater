@@ -13,6 +13,7 @@ using PWCreater.Infrastructure.Srvices.Generators;
 using System.Windows.Media;
 using System.Windows.Documents;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
 {
@@ -45,7 +46,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
 
 
 
-        public byte[,] GetPasswordBytes(int symbolCount, SymbolAlphabet symbolAlphabet)
+        public async Task<byte[,]>  GetPasswordBytes(int symbolCount, SymbolAlphabet symbolAlphabet)
         {
             PasswordGenerator passwordGenerator = new PasswordGenerator();
             string[] dots = GetCheckedString(symbolCount);
