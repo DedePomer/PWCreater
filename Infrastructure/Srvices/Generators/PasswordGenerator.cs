@@ -24,9 +24,9 @@ namespace PWCreater.Infrastructure.Srvices.Generators
 
         
 
-        public string GeneratePassword (int passwordLength, SymbolAlphabet symbol, GenerationMethodEnum generationMethod) 
+        public async Task<string> GeneratePassword (int passwordLength, SymbolAlphabet symbol, GenerationMethodEnum generationMethod) 
         {
-            byte[,] hashBytes = SelectGenerationMethodAsync(passwordLength, symbol, generationMethod).Result;
+            byte[,] hashBytes = await SelectGenerationMethodAsync(passwordLength, symbol, generationMethod);
             StringBuilder password = GetPassword(hashBytes, symbol, passwordLength);
             return password.ToString(); 
         }
@@ -41,14 +41,12 @@ namespace PWCreater.Infrastructure.Srvices.Generators
             {
                 case GenerationMethodEnum.AudioGenerator:
                     //в разоаботке
-                    break;
+                    return hashBytes;
                 case GenerationMethodEnum.CursorGenerator:
-                    hashBytes = await positionStringGenerator.GetPasswordBytes(passwordLength, symbol);
-                    break;
+                    return  await positionStringGenerator.GetPasswordBytes(passwordLength, symbol);
                 default:
-                    break;
+                    return hashBytes;
             }
-            return hashBytes;
         }
 
         //метод проверяет равен ли number элементу массива

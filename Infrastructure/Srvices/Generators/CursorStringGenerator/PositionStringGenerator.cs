@@ -49,9 +49,9 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
         public async Task<byte[,]>  GetPasswordBytes(int symbolCount, SymbolAlphabet symbolAlphabet)
         {
             PasswordGenerator passwordGenerator = new PasswordGenerator();
-            string[] dots = GetCheckedString(symbolCount);
+            string[] dots = await GetCheckedString(symbolCount);
             byte[,] passwordBytes = GetHASHbytes(dots);
-            return passwordBytes;
+            return  passwordBytes;
         }
 
         private byte[,] GetHASHbytes(string[] generatedString)
@@ -73,11 +73,12 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
             return hashByte;
         }
 
-        private string[] GetCheckedString(int stringCount)
+        private async Task<string[]> GetCheckedString(int stringCount)
         {
             string[] dots;
             List<string> listDots = new List<string>();
             int x = 0, y = 0;
+
 
             while(listDots.Count != stringCount)
             {
@@ -89,7 +90,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
                     x = point.X;
                     y = point.Y;
                 }
-                Thread.Sleep(300);
+                await Task.Delay(300);
             }
 
             dots = listDots.ToArray();

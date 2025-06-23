@@ -99,7 +99,7 @@ namespace PWCreater.ViewModel.Windows
         }
         private bool CanGeneratePasswordExecuted(object p) => true;
 
-        private void ChoiceGenerationMethod(int index, SymbolAlphabet symbol)
+        private async void ChoiceGenerationMethod(int index, SymbolAlphabet symbol)
         {
 
             GenerationMethodEnum generationMethodEnum = (GenerationMethodEnum)_selectedGenerationMethod;
@@ -112,7 +112,7 @@ namespace PWCreater.ViewModel.Windows
                     break;
                 case GenerationMethodEnum.CursorGenerator:
                     PasswordGenerator passwordGenerator = new PasswordGenerator();
-                    PasswordString = passwordGenerator.GeneratePassword(_countSymbols, _alphabet, generationMethodEnum);
+                    PasswordString = await passwordGenerator.GeneratePassword(_countSymbols, _alphabet, generationMethodEnum);
                     MessageBox.Show("всё");
                     break;
             }
