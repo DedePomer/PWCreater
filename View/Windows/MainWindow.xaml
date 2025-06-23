@@ -50,7 +50,7 @@
 
             <!--Контейнер с интерактивными элементами-->
             <Grid Grid.Row="1" Grid.Column="1" Panel.ZIndex="2">
-                <Grid Grid.Column="1" Panel.ZIndex="2" Background="White">
+                <Grid Grid.Column="1" Panel.ZIndex="2" Background="{Binding TestBackground}">
 
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -112,12 +112,14 @@
                                 <Button FontSize="16" ToolTip="Копировать" Command="{Binding CopyPasswordCommand}">
                                     <fa:FontAwesome Icon="Copy" Margin="2"/>
                                 </Button>
+                                
                             </StackPanel >
 
 
                             <StackPanel Margin="10" HorizontalAlignment="Right">
                                 <Button Width="150" Content="Сгенерировать" FontSize="16" Padding="3" Command="{Binding GeneratePasswordCommand}">
                                 </Button>
+                                <Button Width="100" Margin="10" Height="15" Command="{Binding CancelGeneratePasswordCommand}"></Button>
                             </StackPanel>
                         </StackPanel>
                         

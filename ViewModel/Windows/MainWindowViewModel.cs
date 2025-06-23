@@ -8,11 +8,34 @@ using PWCreater.Model.UserType;
 using PWCreater.Infrastructure.Enums;
 using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator;
 using PWCreater.Infrastructure.Srvices.Generators;
+using System.Threading.Tasks;
+using System.Threading;
+using System.Windows.Media;
+using System.Windows.Navigation;
 
 namespace PWCreater.ViewModel.Windows
 {
     internal class MainWindowViewModel : ViewModelBase
     {
+
+        public MainWindowViewModel()
+        {
+            TestBackground = new(Color.FromRgb(255, 255, 255));
+            GeneratePasswordCommand = new LamdaCommand(OnGeneratePasswordExecuted, CanGeneratePasswordExecuted);
+            CopyPasswordCommand = new LamdaCommand(OnCopyPasswordExecuted, CanCopyPasswordExecuted);
+            CancelGeneratePasswordCommand = new LamdaCommand(OnCancelGeneratePasswordExecuted, CanCancelGeneratePasswordExecuted);
+        }
+
+        private SolidColorBrush _testBackground;
+        public SolidColorBrush TestBackground 
+        {
+            get => _testBackground;
+            set => Set(ref _testBackground, value);
+        }
+
+        //токен для кнопки отмены генерации
+        private CancellationTokenSource cancelTokenSource = new CancellationTokenSource();
+
         //максимальная и минимальная длина пароля
         public int MaximumSymbols
         {
@@ -99,32 +122,52 @@ namespace PWCreater.ViewModel.Windows
         }
         private bool CanGeneratePasswordExecuted(object p) => true;
 
-        private async void ChoiceGenerationMethod(int index, SymbolAlphabet symbol)
+        private void ChoiceGenerationMethod(int index, SymbolAlphabet symbol)
         {
+            CancellationToken token = cancelTokenSource.Token;
 
-            GenerationMethodEnum generationMethodEnum = (GenerationMethodEnum)_selectedGenerationMethod;
-
-
-            switch (generationMethodEnum)
+            try
             {
-                case GenerationMethodEnum.AudioGenerator:
-                    /*генератор*/
-                    break;
-                case GenerationMethodEnum.CursorGenerator:
-                    PasswordGenerator passwordGenerator = new PasswordGenerator();
-                    PasswordString = await passwordGenerator.GeneratePassword(_countSymbols, _alphabet, generationMethodEnum);
-                    MessageBox.Show("всё");
-                    break;
+                Task.Run(async () =>
+                {
+                    TestBackground = new(Color.FromRgb(255, 0, 255));
+                    GenerationMethodEnum generationMethodEnum = (GenerationMethodEnum)_selectedGenerationMethod;
+                    switch (generationMethodEnum)
+                    {
+                        case GenerationMethodEnum.AudioGenerator:
+                            /*генератор*/
+                            break;
+                        case GenerationMethodEnum.CursorGenerator:
+                            PasswordGenerator passwordGenerator = new PasswordGenerator();
+                            PasswordString = await passwordGenerator.GeneratePassword(_countSymbols, _alphabet, generationMethodEnum);
+                            MessageBox.Show("всё");
+                            break;
+                    }
+                }, token);
+
+
+                TestBackground = new(Color.FromRgb(255, 255, 255));
             }
-         
+            catch (OperationCanceledException)
+            {
+                MessageBox.Show("отмена задачи");
+            }
+            //finally
+            //{
+            //    cancelTokenSource.Dispose();
+            //}
         }
         #endregion
 
-        public MainWindowViewModel()
+        public ICommand CancelGeneratePasswordCommand { get; }
+        private void OnCancelGeneratePasswordExecuted(object p)
         {
-            GeneratePasswordCommand = new LamdaCommand(OnGeneratePasswordExecuted, CanGeneratePasswordExecuted);
-            CopyPasswordCommand = new LamdaCommand(OnCopyPasswordExecuted, CanCopyPasswordExecuted);
+            cancelTokenSource.Cancel();
         }
+
+        private bool CanCancelGeneratePasswordExecuted(object p) => true;
+
+
 
        
 
