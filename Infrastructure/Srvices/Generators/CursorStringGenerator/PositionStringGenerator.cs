@@ -73,14 +73,14 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
             return hashByte;
         }
 
-        private async Task<string[]> GetCheckedString(int stringCount)
+        private async Task<string[]> GetCheckedString(int stringCount) 
         {
             string[] dots;
             List<string> listDots = new List<string>();
             int x = 0, y = 0;
 
 
-            while(listDots.Count != stringCount)
+            while(listDots.Count != stringCount) /*добавить токен*/
             {
                 PointStruct point;
                 if (GetCursorPos(out point) && point.X != x && point.Y != y

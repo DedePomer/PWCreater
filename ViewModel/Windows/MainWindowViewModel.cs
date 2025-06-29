@@ -122,30 +122,25 @@ namespace PWCreater.ViewModel.Windows
         }
         private bool CanGeneratePasswordExecuted(object p) => true;
 
-        private void ChoiceGenerationMethod(int index, SymbolAlphabet symbol)
+        private async Task ChoiceGenerationMethod(int index, SymbolAlphabet symbol)
         {
             CancellationToken token = cancelTokenSource.Token;
 
             try
             {
-                Task.Run(async () =>
+                TestBackground = new(Color.FromRgb(255, 0, 255));
+                GenerationMethodEnum generationMethodEnum = (GenerationMethodEnum)_selectedGenerationMethod;
+                switch (generationMethodEnum)
                 {
-                    TestBackground = new(Color.FromRgb(255, 0, 255));
-                    GenerationMethodEnum generationMethodEnum = (GenerationMethodEnum)_selectedGenerationMethod;
-                    switch (generationMethodEnum)
-                    {
-                        case GenerationMethodEnum.AudioGenerator:
-                            /*генератор*/
-                            break;
-                        case GenerationMethodEnum.CursorGenerator:
-                            PasswordGenerator passwordGenerator = new PasswordGenerator();
-                            PasswordString = await passwordGenerator.GeneratePassword(_countSymbols, _alphabet, generationMethodEnum);
-                            MessageBox.Show("всё");
-                            break;
-                    }
-                }, token);
-
-
+                    case GenerationMethodEnum.AudioGenerator:
+                        /*генератор*/
+                        break;
+                    case GenerationMethodEnum.CursorGenerator:
+                        PasswordGenerator passwordGenerator = new PasswordGenerator();
+                        PasswordString = await passwordGenerator.GeneratePassword(_countSymbols, _alphabet, generationMethodEnum);
+                        MessageBox.Show("всё");
+                        break;
+                }
                 TestBackground = new(Color.FromRgb(255, 255, 255));
             }
             catch (OperationCanceledException)
