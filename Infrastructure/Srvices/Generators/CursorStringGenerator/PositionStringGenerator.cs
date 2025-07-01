@@ -51,32 +51,20 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
         {
             PasswordGenerator passwordGenerator = new PasswordGenerator();
             List<string> dots = await GetCheckedStringAsync(symbolCount, cancelTokenSource);
-            byte[,] passwordBytes = GetHASHbytes(dots);
+            byte[,] passwordBytes = GetHASHbytes(dots, symbolCount);
             return  passwordBytes;
         }
 
-        private byte[,] GetHASHbytes(List<string> generatedStrings)
+        private byte[,] GetHASHbytes(List<string> generatedStrings, int symbolCount)
         {
-            byte[,] hashByte = new byte[generatedStrings.Count, CountByetsOnSha256];
-            for (int i = 0; i < generatedStrings.Count; i++)
-            {
-                byte[] convertedString = Encoding.UTF8.GetBytes(generatedStrings[i]);
-                using (SHA256 mySHA256 = SHA256.Create())
-                {
-                    byte[] computeBytes = mySHA256.ComputeHash(convertedString);
-                    for (int y = 0; y < CountByetsOnSha256; y++)
-                    {
-                        hashByte[i, y] = computeBytes[y];
-                    }                 
-                }
-            }
-            
+            byte[,] hashByte = new byte[symbolCount, CountByetsOnSha256];
+            CreateHASHBytesArray(hashByte, generatedStrings, symbolCount);
             return hashByte;
         }
 
         private async Task<List<string>> GetCheckedStringAsync(int stringCount, CancellationTokenSource cancelTokenSource) 
         {
-            CancellationToken token = cancelTokenSource.Token;
+            CancellationToken token = cancelTokenSource.Token;          
             List<string> dots = new List<string>();
             int x = 0, y = 0;
             try
@@ -101,7 +89,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
             }
             catch (OperationCanceledException e) 
             {
-                MessageBox.Show("отмена генерации");
+                MessageBox.Show("отмена генерации"); /*вывести в VM*/
             }
             finally 
             {
@@ -111,6 +99,43 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
             return dots;
         }
 
+        private byte[,] CreateHASHBytesArray(byte[,] hashByte , List<string> generatedStrings, int symbolCount)
+        {
+            RandomNumberGenerator randomNumberGenerator = RandomNumberGenerator.Create();
+
+            int difference = symbolCount - generatedStrings.Count;
+            if (difference <= 0)
+            {
+                difference = 1;
+            }
+            byte[] randomBytes = new byte[difference];
+
+            for (int i = 0; i < symbolCount; i++)
+            {
+                byte[] convertedString;
+                if (i >= generatedStrings.Count)
+                {
+                    randomNumberGenerator.GetBytes(randomBytes);
+                    convertedString = randomBytes;
+                }
+                else
+                {
+                    convertedString = Encoding.UTF8.GetBytes(generatedStrings[i]);
+                }                    
+
+                using (SHA256 mySHA256 = SHA256.Create())
+                {
+                    byte[] computeBytes = mySHA256.ComputeHash(convertedString);
+                    for (int y = 0; y < CountByetsOnSha256; y++)
+                    {
+                        hashByte[i, y] = computeBytes[y];
+                    }
+                }
+            }
+
+            randomNumberGenerator.Dispose();
+            return hashByte;
+        }
         private bool IsChangedCountDotsInZone(DotDataType dot)
         {
             ScreenResolutionDataType screenResolution = GetScreenResolution();
