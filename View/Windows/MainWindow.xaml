@@ -50,7 +50,7 @@
 
             <!--Контейнер с интерактивными элементами-->
             <Grid Grid.Row="1" Grid.Column="1" Panel.ZIndex="2">
-                <Grid Grid.Column="1" Panel.ZIndex="2" Background="{Binding TestBackground}">
+                <Grid Grid.Column="1" Panel.ZIndex="2" Background="White">
 
                     <Grid.RowDefinitions>
                         <RowDefinition/>

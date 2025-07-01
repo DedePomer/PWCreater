@@ -1,17 +1,13 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using PWCreater.Infrastructure.Commands;
-using PWCreater.Infrastructure.Srvices;
-using PWCreater.ViewModel.Base;
-using PWCreater.Model.UserType;
 using PWCreater.Infrastructure.Enums;
-using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator;
 using PWCreater.Infrastructure.Srvices.Generators;
-using System.Threading.Tasks;
-using System.Threading;
-using System.Windows.Media;
-using System.Windows.Navigation;
+using PWCreater.Model.UserType;
+using PWCreater.ViewModel.Base;
 
 namespace PWCreater.ViewModel.Windows
 {
@@ -20,21 +16,13 @@ namespace PWCreater.ViewModel.Windows
 
         public MainWindowViewModel()
         {
-            TestBackground = new(Color.FromRgb(255, 255, 255));
             GeneratePasswordCommand = new LamdaCommand(OnGeneratePasswordExecuted, CanGeneratePasswordExecuted);
             CopyPasswordCommand = new LamdaCommand(OnCopyPasswordExecuted, CanCopyPasswordExecuted);
             CancelGeneratePasswordCommand = new LamdaCommand(OnCancelGeneratePasswordExecuted, CanCancelGeneratePasswordExecuted);
         }
 
-        private SolidColorBrush _testBackground;
-        public SolidColorBrush TestBackground 
-        {
-            get => _testBackground;
-            set => Set(ref _testBackground, value);
-        }
-
         //токен для кнопки отмены генерации
-        private CancellationTokenSource cancelTokenSource = new CancellationTokenSource();
+        private CancellationTokenSource cancelTokenSource;
 
         //максимальная и минимальная длина пароля
         public int MaximumSymbols
@@ -49,7 +37,7 @@ namespace PWCreater.ViewModel.Windows
         //количество символов в пароле
         private int _countSymbols = 16;
         public int CountSymbols
-        { 
+        {
             get { return _countSymbols; }
             set { Set(ref _countSymbols, value); }
         }
@@ -58,10 +46,10 @@ namespace PWCreater.ViewModel.Windows
 
         //варианты в CheckBOX
         private SymbolAlphabet _alphabet = new SymbolAlphabet();
-        public SymbolAlphabet Alphabet 
+        public SymbolAlphabet Alphabet
         {
             get
-            { 
+            {
                 return _alphabet;
             }
             set
@@ -114,49 +102,33 @@ namespace PWCreater.ViewModel.Windows
         public ICommand GeneratePasswordCommand { get; }
         private void OnGeneratePasswordExecuted(object p)
         {
-
-            if (_selectedGenerationMethod >= 0)
-            {
-                ChoiceGenerationMethod(_selectedGenerationMethod, _alphabet);
-            }
+            ChoiceGenerationMethodAsync(_selectedGenerationMethod, _alphabet);
         }
         private bool CanGeneratePasswordExecuted(object p) => true;
 
-        private async Task ChoiceGenerationMethod(int index, SymbolAlphabet symbol)
+        private async Task ChoiceGenerationMethodAsync(int index, SymbolAlphabet symbol)
         {
-            CancellationToken token = cancelTokenSource.Token;
+            cancelTokenSource = new CancellationTokenSource();
+            GenerationMethodEnum generationMethodEnum = (GenerationMethodEnum)_selectedGenerationMethod;
 
-            try
+            switch (generationMethodEnum)
             {
-                TestBackground = new(Color.FromRgb(255, 0, 255));
-                GenerationMethodEnum generationMethodEnum = (GenerationMethodEnum)_selectedGenerationMethod;
-                switch (generationMethodEnum)
-                {
-                    case GenerationMethodEnum.AudioGenerator:
-                        /*генератор*/
-                        break;
-                    case GenerationMethodEnum.CursorGenerator:
-                        PasswordGenerator passwordGenerator = new PasswordGenerator();
-                        PasswordString = await passwordGenerator.GeneratePassword(_countSymbols, _alphabet, generationMethodEnum);
-                        MessageBox.Show("всё");
-                        break;
-                }
-                TestBackground = new(Color.FromRgb(255, 255, 255));
+                case GenerationMethodEnum.AudioGenerator:
+                    /*генератор*/
+                    break;
+                case GenerationMethodEnum.CursorGenerator:
+                    PasswordGenerator passwordGenerator = new PasswordGenerator();
+                    PasswordString = await passwordGenerator.GeneratePassword(_countSymbols, _alphabet, generationMethodEnum, cancelTokenSource);
+                    MessageBox.Show("всё");
+                    break;
             }
-            catch (OperationCanceledException)
-            {
-                MessageBox.Show("отмена задачи");
-            }
-            //finally
-            //{
-            //    cancelTokenSource.Dispose();
-            //}
         }
         #endregion
 
         public ICommand CancelGeneratePasswordCommand { get; }
         private void OnCancelGeneratePasswordExecuted(object p)
         {
+            
             cancelTokenSource.Cancel();
         }
 
@@ -164,7 +136,7 @@ namespace PWCreater.ViewModel.Windows
 
 
 
-       
+
 
     }
 }

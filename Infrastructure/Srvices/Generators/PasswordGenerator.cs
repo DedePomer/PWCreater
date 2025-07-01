@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using PWCreater.Infrastructure.Enums;
 using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator;
@@ -24,15 +25,15 @@ namespace PWCreater.Infrastructure.Srvices.Generators
 
         
 
-        public async Task<string> GeneratePassword (int passwordLength, SymbolAlphabet symbol, GenerationMethodEnum generationMethod) 
+        public async Task<string> GeneratePassword (int passwordLength, SymbolAlphabet symbol, GenerationMethodEnum generationMethod, CancellationTokenSource cancelTokenSource) 
         {
-            byte[,] hashBytes = await SelectGenerationMethodAsync(passwordLength, symbol, generationMethod);
+            byte[,] hashBytes = await SelectGenerationMethodAsync(passwordLength, symbol, generationMethod, cancelTokenSource);
             StringBuilder password = GetPassword(hashBytes, symbol, passwordLength);
             return password.ToString(); 
         }
 
         //метод для выбора способа генерации
-        private async Task<byte[,]> SelectGenerationMethodAsync(int passwordLength, SymbolAlphabet symbol, GenerationMethodEnum generationMethod)
+        private async Task<byte[,]> SelectGenerationMethodAsync(int passwordLength, SymbolAlphabet symbol, GenerationMethodEnum generationMethod, CancellationTokenSource cancelTokenSource)
         {
             byte[,] hashBytes = { };
             PositionStringGenerator positionStringGenerator = new PositionStringGenerator();
@@ -43,7 +44,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators
                     //в разоаботке
                     return hashBytes;
                 case GenerationMethodEnum.CursorGenerator:
-                    return  await positionStringGenerator.GetPasswordBytes(passwordLength, symbol);
+                    return  await positionStringGenerator.GetPasswordBytes(passwordLength, symbol, cancelTokenSource);
                 default:
                     return hashBytes;
             }

@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Documents;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
 {
@@ -46,20 +47,20 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
 
 
 
-        public async Task<byte[,]>  GetPasswordBytes(int symbolCount, SymbolAlphabet symbolAlphabet)
+        public async Task<byte[,]>  GetPasswordBytes(int symbolCount, SymbolAlphabet symbolAlphabet, CancellationTokenSource cancelTokenSource)
         {
             PasswordGenerator passwordGenerator = new PasswordGenerator();
-            string[] dots = await GetCheckedString(symbolCount);
+            List<string> dots = await GetCheckedStringAsync(symbolCount, cancelTokenSource);
             byte[,] passwordBytes = GetHASHbytes(dots);
             return  passwordBytes;
         }
 
-        private byte[,] GetHASHbytes(string[] generatedString)
+        private byte[,] GetHASHbytes(List<string> generatedStrings)
         {
-            byte[,] hashByte = new byte[generatedString.Length, CountByetsOnSha256];
-            for (int i = 0; i < generatedString.Length; i++)
+            byte[,] hashByte = new byte[generatedStrings.Count, CountByetsOnSha256];
+            for (int i = 0; i < generatedStrings.Count; i++)
             {
-                byte[] convertedString = Encoding.UTF8.GetBytes(generatedString[i]);
+                byte[] convertedString = Encoding.UTF8.GetBytes(generatedStrings[i]);
                 using (SHA256 mySHA256 = SHA256.Create())
                 {
                     byte[] computeBytes = mySHA256.ComputeHash(convertedString);
@@ -73,28 +74,39 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
             return hashByte;
         }
 
-        private async Task<string[]> GetCheckedString(int stringCount) 
+        private async Task<List<string>> GetCheckedStringAsync(int stringCount, CancellationTokenSource cancelTokenSource) 
         {
-            string[] dots;
-            List<string> listDots = new List<string>();
+            CancellationToken token = cancelTokenSource.Token;
+            List<string> dots = new List<string>();
             int x = 0, y = 0;
-
-
-            while(listDots.Count != stringCount) /*добавить токен*/
+            try
             {
-                PointStruct point;
-                if (GetCursorPos(out point) && point.X != x && point.Y != y
-                    && IsChangedCountDotsInZone(new DotDataType() { X = point.X, Y = point.Y }))
-                {
-                    listDots.Add(point.X + "" + point.Y);
-                    x = point.X;
-                    y = point.Y;
-                }
-                await Task.Delay(300);
+                while (dots.Count != stringCount)
+                {   
+                    
+                    if (token.IsCancellationRequested)
+                        token.ThrowIfCancellationRequested();
+
+                    PointStruct point;
+                    if (GetCursorPos(out point) && point.X != x && point.Y != y
+                        && IsChangedCountDotsInZone(new DotDataType() { X = point.X, Y = point.Y }))
+                    {
+                        dots.Add(point.X + "" + point.Y);
+                        x = point.X;
+                        y = point.Y;
+                    }
+                    await Task.Delay(300);
+
+                }                
             }
-
-            dots = listDots.ToArray();
-
+            catch (OperationCanceledException e) 
+            {
+                MessageBox.Show("отмена генерации");
+            }
+            finally 
+            {
+                cancelTokenSource.Dispose();              
+            }
 
             return dots;
         }
