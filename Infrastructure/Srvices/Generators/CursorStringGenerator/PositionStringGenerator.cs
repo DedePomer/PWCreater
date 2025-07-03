@@ -1,20 +1,22 @@
 ﻿using PWCreater.Infrastructure.Interfaces;
+using PWCreater.Infrastructure.Srvices.Generators;
 using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.DataType;
 using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.Enums;
 using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.Structurs;
 using PWCreater.Model.UserType;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
-using PWCreater.Infrastructure.Srvices.Generators;
-using System.Windows.Media;
-using System.Windows.Documents;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
+using System.Windows.Media;
 
 namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
 {
@@ -90,6 +92,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
             catch (OperationCanceledException e) 
             {
                 MessageBox.Show("отмена генерации"); /*вывести в VM*/
+                return Enumerable.Empty<string>();
             }
             finally 
             {
