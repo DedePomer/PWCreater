@@ -114,6 +114,8 @@
     <Compile Include="Infrastructure\Commands\Base\Command.cs" />
     <Compile Include="Infrastructure\Commands\LamdaComand.cs" />
     <Compile Include="Infrastructure\Enums\GenerationMethodEnum.cs" />
+    <Compile Include="Infrastructure\Srvices\ErrorService\ErrorService.cs" />
+    <Compile Include="Infrastructure\Srvices\ErrorService\Interfaces\IErrorService.cs" />
     <Compile Include="Infrastructure\Srvices\Generators\CursorStringGenerator\DataType\DotDataType.cs" />
     <Compile Include="Infrastructure\Srvices\Generators\CursorStringGenerator\DataType\RectangleZoneDataType.cs" />
     <Compile Include="Infrastructure\Srvices\Generators\CursorStringGenerator\DataType\ScreenResolutionDataType.cs" />
