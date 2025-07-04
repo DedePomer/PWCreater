@@ -11,9 +11,21 @@ namespace PWCreater.Infrastructure.Srvices.ErrorService
     public class ErrorService : IErrorService
     {
         //создал приватный чтоб вызвать нельзя было из вне
-        private ErrorService() { }  
+        private ErrorService() { }
 
-        public static ErrorService Service = new ErrorService();
+        private static ErrorService _service;
+        
+        public static ErrorService Service
+        {
+            get 
+            {
+                if (_service == null)
+                {
+                    _service = new();
+                }
+                return _service;
+            }
+        }
 
         public event EventHandler<ErrorMessage> ErrorOccurred;
 

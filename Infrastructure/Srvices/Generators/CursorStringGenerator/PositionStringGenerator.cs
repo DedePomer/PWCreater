@@ -1,22 +1,16 @@
 ﻿using PWCreater.Infrastructure.Interfaces;
-using PWCreater.Infrastructure.Srvices.Generators;
 using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.DataType;
 using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.Enums;
 using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.Structurs;
 using PWCreater.Model.UserType;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Documents;
-using System.Windows.Media;
 
 namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
 {
@@ -49,12 +43,12 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
 
 
 
-        public async Task<byte[,]>  GetPasswordBytes(int symbolCount, SymbolAlphabet symbolAlphabet, CancellationTokenSource cancelTokenSource)
+        public async Task<byte[,]> GetPasswordBytes(int symbolCount, SymbolAlphabet symbolAlphabet, CancellationTokenSource cancelTokenSource)
         {
             PasswordGenerator passwordGenerator = new PasswordGenerator();
             List<string> dots = await GetCheckedStringAsync(symbolCount, cancelTokenSource);
             byte[,] passwordBytes = GetHASHbytes(dots, symbolCount);
-            return  passwordBytes;
+            return passwordBytes;
         }
 
         private byte[,] GetHASHbytes(List<string> generatedStrings, int symbolCount)
@@ -64,16 +58,16 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
             return hashByte;
         }
 
-        private async Task<List<string>> GetCheckedStringAsync(int stringCount, CancellationTokenSource cancelTokenSource) 
+        private static async Task<List<string>> GetCheckedStringAsync(int stringCount, CancellationTokenSource cancelTokenSource)
         {
-            CancellationToken token = cancelTokenSource.Token;          
+            CancellationToken token = cancelTokenSource.Token;
             List<string> dots = new List<string>();
             int x = 0, y = 0;
             try
             {
                 while (dots.Count != stringCount)
-                {   
-                    
+                {
+
                     if (token.IsCancellationRequested)
                         token.ThrowIfCancellationRequested();
 
@@ -87,21 +81,21 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
                     }
                     await Task.Delay(300);
 
-                }                
+                }
             }
-            catch (OperationCanceledException e) 
+            catch (OperationCanceledException e)
             {
                 ErrorService.Service
             }
-            finally 
+            finally
             {
-                cancelTokenSource.Dispose();              
+                cancelTokenSource.Dispose();
             }
 
             return dots;
         }
 
-        private byte[,] CreateHASHBytesArray(byte[,] hashByte , List<string> generatedStrings, int symbolCount)
+        private byte[,] CreateHASHBytesArray(byte[,] hashByte, List<string> generatedStrings, int symbolCount)
         {
             RandomNumberGenerator randomNumberGenerator = RandomNumberGenerator.Create();
 
@@ -123,7 +117,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
                 else
                 {
                     convertedString = Encoding.UTF8.GetBytes(generatedStrings[i]);
-                }                    
+                }
 
                 using (SHA256 mySHA256 = SHA256.Create())
                 {
