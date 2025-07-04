@@ -1,10 +1,12 @@
 ﻿using System;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using PWCreater.Infrastructure.Commands;
 using PWCreater.Infrastructure.Enums;
+using PWCreater.Infrastructure.Srvices.ErrorService;
 using PWCreater.Infrastructure.Srvices.Generators;
 using PWCreater.Model.UserType;
 using PWCreater.ViewModel.Base;
@@ -14,12 +16,7 @@ namespace PWCreater.ViewModel.Windows
     internal class MainWindowViewModel : ViewModelBase
     {
 
-        public MainWindowViewModel()
-        {
-            GeneratePasswordCommand = new LamdaCommand(OnGeneratePasswordExecuted, CanGeneratePasswordExecuted);
-            CopyPasswordCommand = new LamdaCommand(OnCopyPasswordExecuted, CanCopyPasswordExecuted);
-            CancelGeneratePasswordCommand = new LamdaCommand(OnCancelGeneratePasswordExecuted, CanCancelGeneratePasswordExecuted);
-        }
+        public string ErrorMassage { get; set; }
 
         //токен для кнопки отмены генерации
         private CancellationTokenSource cancelTokenSource;
@@ -88,7 +85,14 @@ namespace PWCreater.ViewModel.Windows
             }
         }
 
+        public MainWindowViewModel()
+        {
+            ErrorService.Service.ErrorOccurred += OnErrorOccurred;
 
+            GeneratePasswordCommand = new LamdaCommand(OnGeneratePasswordExecuted, CanGeneratePasswordExecuted);
+            CopyPasswordCommand = new LamdaCommand(OnCopyPasswordExecuted, CanCopyPasswordExecuted);
+            CancelGeneratePasswordCommand = new LamdaCommand(OnCancelGeneratePasswordExecuted, CanCancelGeneratePasswordExecuted);
+        }
 
         //команды
         public ICommand CopyPasswordCommand { get; }
@@ -135,7 +139,10 @@ namespace PWCreater.ViewModel.Windows
         private bool CanCancelGeneratePasswordExecuted(object p) => true;
 
 
-
+        private void OnErrorOccurred(object sender, ErrorMessage e)
+        {
+            ErrorMassage = e.NameOfError;
+        }
 
 
     }

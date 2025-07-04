@@ -9,7 +9,7 @@ namespace PWCreater.Infrastructure.Srvices.ErrorService.Interfaces
 {
     public interface IErrorService
     {
-        event EventHandler<ErrorEventArgs> ErrorOccurred;
-        void ReportError(Exception exception);
+        event EventHandler<ErrorMessage> ErrorOccurred;
+        void ReportError(string errorString);
     }
 }

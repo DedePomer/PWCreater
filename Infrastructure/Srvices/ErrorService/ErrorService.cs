@@ -13,13 +13,13 @@ namespace PWCreater.Infrastructure.Srvices.ErrorService
         //создал приватный чтоб вызвать нельзя было из вне
         private ErrorService() { }  
 
-        public ErrorService service = new ErrorService();
+        public static ErrorService Service = new ErrorService();
 
-        public event EventHandler<ErrorEventArgs> ErrorOccurred;
+        public event EventHandler<ErrorMessage> ErrorOccurred;
 
-        public void ReportError(Exception exception)
+        public void ReportError(string errorString)
         {
-            ErrorOccurred?.Invoke(this, new ErrorEventArgs(exception));
+            ErrorOccurred?.Invoke(this, new ErrorMessage(errorString));
         }
     }
 }

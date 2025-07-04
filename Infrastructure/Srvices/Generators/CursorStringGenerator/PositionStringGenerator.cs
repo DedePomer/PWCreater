@@ -91,8 +91,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
             }
             catch (OperationCanceledException e) 
             {
-                MessageBox.Show("отмена генерации"); /*вывести в VM*/
-                return Enumerable.Empty<string>();
+                ErrorService.Service
             }
             finally 
             {
