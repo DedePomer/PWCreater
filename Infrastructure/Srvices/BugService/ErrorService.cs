@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PWCreater.Infrastructure.Srvices.BugService.Interfaces;
 
 namespace PWCreater.Infrastructure.Srvices.BugService
@@ -14,10 +9,10 @@ namespace PWCreater.Infrastructure.Srvices.BugService
         private ErrorService() { }
 
         private static ErrorService _service;
-        
+
         public static ErrorService Service
         {
-            get 
+            get
             {
                 if (_service == null)
                 {
@@ -29,7 +24,7 @@ namespace PWCreater.Infrastructure.Srvices.BugService
 
         public event EventHandler<ErrorMessage> ErrorOccurred;
 
-        public void ReportError(string errorString)
+        public void ReportError(SystemException errorString)
         {
             ErrorOccurred?.Invoke(this, new ErrorMessage(errorString));
         }

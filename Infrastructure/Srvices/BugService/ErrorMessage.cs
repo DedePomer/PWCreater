@@ -8,10 +8,10 @@ namespace PWCreater.Infrastructure.Srvices.BugService
 {
     public class ErrorMessage: EventArgs
     {
-        public string NameOfError { get; }
-        public ErrorMessage(string nameOfError) 
+        public SystemException NameOfExceptiom { get; }
+        public ErrorMessage(SystemException nameOfExceptiom) 
         {
-            NameOfError = nameOfError;
+            NameOfExceptiom = nameOfExceptiom;
         }
     }
 }

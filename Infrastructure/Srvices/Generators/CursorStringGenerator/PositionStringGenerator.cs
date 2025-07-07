@@ -1,11 +1,4 @@
-﻿using PWCreater.Infrastructure.Interfaces;
-using PWCreater.Infrastructure.Srvices.BugService;
-using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.DataType;
-using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.Enums;
-using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.Structurs;
-using PWCreater.Model.UserType;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.InteropServices;
@@ -13,6 +6,12 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using PWCreater.Infrastructure.Interfaces;
+using PWCreater.Infrastructure.Srvices.BugService;
+using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.DataType;
+using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.Enums;
+using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.Structurs;
+using PWCreater.Model.UserType;
 
 namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
 {
@@ -69,7 +68,6 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
             {
                 while (dots.Count != stringCount)
                 {
-
                     if (token.IsCancellationRequested)
                         token.ThrowIfCancellationRequested();
 
@@ -82,12 +80,11 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
                         y = point.Y;
                     }
                     await Task.Delay(300);
-
                 }
             }
-            catch (OperationCanceledException)
+            catch (OperationCanceledException e)
             {
-                ErrorService.Service.ReportError("отмена генерации");
+                ErrorService.Service.ReportError(e);
             }
             finally
             {
@@ -207,7 +204,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
             return false;
         }
 
-        private  ScreenResolutionDataType GetScreenResolution() /*не проверял с несколькими экранами*/
+        private ScreenResolutionDataType GetScreenResolution() /*не проверял с несколькими экранами*/
         {
             Graphics graphics = Graphics.FromHwnd(IntPtr.Zero);
             IntPtr desktop = graphics.GetHdc();

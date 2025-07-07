@@ -14,9 +14,6 @@ namespace PWCreater.ViewModel.Windows
 {
     internal class MainWindowViewModel : ViewModelBase
     {
-
-        public string ErrorMassage { get; set; }
-
         //токен для кнопки отмены генерации
         private CancellationTokenSource cancelTokenSource;
 
@@ -139,7 +136,7 @@ namespace PWCreater.ViewModel.Windows
 
         private void OnErrorOccurred(object sender, ErrorMessage e)
         {
-            MessageBox.Show(e.NameOfError);
+            MessageBox.Show(e.NameOfExceptiom.Message);
         }
 
 
