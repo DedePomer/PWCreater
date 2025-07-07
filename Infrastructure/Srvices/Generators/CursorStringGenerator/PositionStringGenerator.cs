@@ -85,7 +85,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
 
                 }
             }
-            catch (OperationCanceledException e)
+            catch (OperationCanceledException)
             {
                 ErrorService.Service.ReportError("отмена генерации");
             }
