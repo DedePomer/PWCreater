@@ -1,8 +1,10 @@
 ﻿using PWCreater.Infrastructure.Interfaces;
+using PWCreater.Infrastructure.Srvices.BugService;
 using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.DataType;
 using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.Enums;
 using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.Structurs;
 using PWCreater.Model.UserType;
+
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -58,7 +60,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
             return hashByte;
         }
 
-        private static async Task<List<string>> GetCheckedStringAsync(int stringCount, CancellationTokenSource cancelTokenSource)
+        private async Task<List<string>> GetCheckedStringAsync(int stringCount, CancellationTokenSource cancelTokenSource)
         {
             CancellationToken token = cancelTokenSource.Token;
             List<string> dots = new List<string>();
@@ -85,7 +87,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
             }
             catch (OperationCanceledException e)
             {
-                ErrorService.Service
+                ErrorService.Service.ReportError("отмена генерации");
             }
             finally
             {
@@ -205,7 +207,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
             return false;
         }
 
-        private ScreenResolutionDataType GetScreenResolution() /*не проверял с несколькими экранами*/
+        private  ScreenResolutionDataType GetScreenResolution() /*не проверял с несколькими экранами*/
         {
             Graphics graphics = Graphics.FromHwnd(IntPtr.Zero);
             IntPtr desktop = graphics.GetHdc();

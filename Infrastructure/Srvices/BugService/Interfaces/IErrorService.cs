@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PWCreater.Infrastructure.Srvices.ErrorService.Interfaces
+namespace PWCreater.Infrastructure.Srvices.BugService.Interfaces
 {
     public interface IErrorService
     {

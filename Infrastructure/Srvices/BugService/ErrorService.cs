@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PWCreater.Infrastructure.Srvices.ErrorService.Interfaces;
+using PWCreater.Infrastructure.Srvices.BugService.Interfaces;
 
-namespace PWCreater.Infrastructure.Srvices.ErrorService
+namespace PWCreater.Infrastructure.Srvices.BugService
 {
     public class ErrorService : IErrorService
     {

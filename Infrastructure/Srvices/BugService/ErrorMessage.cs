@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PWCreater.Infrastructure.Srvices.ErrorService
+namespace PWCreater.Infrastructure.Srvices.BugService
 {
     public class ErrorMessage: EventArgs
     {

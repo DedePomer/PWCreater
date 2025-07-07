@@ -1,15 +1,14 @@
-﻿using System;
-using System.IO;
+﻿using PWCreater.Infrastructure.Commands;
+using PWCreater.Infrastructure.Enums;
+using PWCreater.Infrastructure.Srvices.BugService;
+using PWCreater.Infrastructure.Srvices.Generators;
+using PWCreater.Model.UserType;
+using PWCreater.ViewModel.Base;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using PWCreater.Infrastructure.Commands;
-using PWCreater.Infrastructure.Enums;
-using PWCreater.Infrastructure.Srvices.ErrorService;
-using PWCreater.Infrastructure.Srvices.Generators;
-using PWCreater.Model.UserType;
-using PWCreater.ViewModel.Base;
 
 namespace PWCreater.ViewModel.Windows
 {
@@ -132,7 +131,7 @@ namespace PWCreater.ViewModel.Windows
         public ICommand CancelGeneratePasswordCommand { get; }
         private void OnCancelGeneratePasswordExecuted(object p)
         {
-            
+
             cancelTokenSource.Cancel();
         }
 
