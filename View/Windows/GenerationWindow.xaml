@@ -1,0 +1,40 @@
+﻿<Window x:Class="PWCreater.View.Windows.GenerationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PWCreater.View.Windows"
+        mc:Ignorable="d"
+        Title="GenerationWindow" Height="200" Width="500"       
+        Topmost="True"
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None">
+    
+    
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel HorizontalAlignment="Left" Grid.Row="0">
+            <TextBlock Margin="25 10 0 0"  FontSize="17" FontFamily="RomanC" FontWeight="Bold">Процесс генерации  пароля</TextBlock>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Center" Grid.Row="1">
+            <ProgressBar Width="450" Height="15" Margin="15 25"></ProgressBar>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Right" Grid.Row="2">
+            <Button Width="60" Margin="0 30 25 0">Отмена</Button>
+        </StackPanel>
+
+    </Grid>
+    
+    
+    
+    
+</Window>
