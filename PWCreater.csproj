@@ -132,6 +132,7 @@
     <Compile Include="Infrastructure\Srvices\Generators\PasswordGenerator.cs" />
     <Compile Include="Model\UserType\SymbolAlphabet.cs" />
     <Compile Include="ViewModel\Base\ViewModelBase.cs" />
+    <Compile Include="ViewModel\Windows\GenerationWindowViewModel.cs" />
     <Compile Include="ViewModel\Windows\MainWindowViewModel.cs" />
     <Compile Include="View\Windows\GenerationWindow.xaml.cs">
       <DependentUpon>GenerationWindow.xaml</DependentUpon>
@@ -169,6 +170,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Infrastructure\Srvices\ProgressBarService\" />
     <Folder Include="Infrastructure\Structurs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

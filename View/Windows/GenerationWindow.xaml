@@ -4,14 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PWCreater.View.Windows"
+        xmlns:vm="clr-namespace:PWCreater.ViewModel.Windows"
         mc:Ignorable="d"
         Title="GenerationWindow" Height="200" Width="500"       
         Topmost="True"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None">
-    
-    
+
+    <Window.DataContext>
+        <vm:GenerationWindowViewModel/>
+    </Window.DataContext>
     
     <Grid>
         <Grid.RowDefinitions>
