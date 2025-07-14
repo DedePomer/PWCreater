@@ -1,4 +1,5 @@
-﻿using PWCreater.ViewModel.Base;
+﻿using PWCreater.Infrastructure.Srvices.ProgressBar;
+using PWCreater.ViewModel.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,8 @@ namespace PWCreater.ViewModel.Windows
         }
 
         public GenerationWindowViewModel()
-        {        
+        {
+            ProgressBarService
         }
     }
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PWCreater.Infrastructure.Srvices.ProgressBar
+﻿namespace PWCreater.Infrastructure.Srvices.ProgressBar
 {
     public class ProgressBarService
     {
@@ -20,6 +14,18 @@ namespace PWCreater.Infrastructure.Srvices.ProgressBar
                     _service = new();
                 }
                 return _service;
+            }
+        }
+
+        public int? ProgressBarValue
+        {
+            get => ProgressBarValue;
+            set
+            {
+                if (ProgressBarValue == null)
+                    ProgressBarValue = 0;
+                else
+                    ProgressBarValue = value;
             }
         }
 
