@@ -5,6 +5,7 @@ using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.Enums;
 using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.Structurs;
 using PWCreater.Infrastructure.Srvices.ProgressBar;
 using PWCreater.Model.UserType;
+using PWCreater.ViewModel.Windows;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -67,6 +68,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
 
         private async Task<List<string>> GetCheckedStringAsync(int stringCount, CancellationTokenSource cancelTokenSource)
         {
+            GenerationWindowViewModel generationWindowViewModel = new GenerationWindowViewModel();
             CancellationToken token = cancelTokenSource.Token;
             List<string> dots = new List<string>();
             int x = 0, y = 0;
@@ -86,7 +88,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
                         y = point.Y;
                     }
                     await Task.Delay(300);
-                    ProgressBarService.Service.ProgressBarValue += _generationUnit;
+                    generationWindowViewModel.GenerationValue += _generationUnit;
                 }
             }
             catch (OperationCanceledException e)

@@ -5,17 +5,18 @@ namespace PWCreater.ViewModel.Windows
 {
     internal class GenerationWindowViewModel : ViewModelBase
     {
-        private int _generationValue;
-        public int GenerationProgress
+        private int _generationValue = 0;
+        public int GenerationValue
         {
             get => _generationValue;
 
-            set { Set(ref _generationValue, value); }
+            set
+            {
+                _generationValue = value;
+                OnPropertyChanged(_generationValue);
+            }
         }
 
-        public GenerationWindowViewModel()
-        {
-            _generationValue = ProgressBarService.Service.ProgressBarValue;
-        }
+        public GenerationWindowViewModel() { }
     }
 }

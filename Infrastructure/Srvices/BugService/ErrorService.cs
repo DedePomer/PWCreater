@@ -1,9 +1,8 @@
 ﻿using System;
-using PWCreater.Infrastructure.Srvices.BugService.Interfaces;
 
 namespace PWCreater.Infrastructure.Srvices.BugService
 {
-    public class ErrorService : IErrorService
+    public class ErrorService
     {
         //создал приватный чтоб вызвать нельзя было из вне
         private ErrorService() { }

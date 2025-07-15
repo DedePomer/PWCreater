@@ -120,7 +120,6 @@
     <Compile Include="Infrastructure\Enums\GenerationMethodEnum.cs" />
     <Compile Include="Infrastructure\Srvices\BugService\ErrorMessage.cs" />
     <Compile Include="Infrastructure\Srvices\BugService\ErrorService.cs" />
-    <Compile Include="Infrastructure\Srvices\BugService\Interfaces\IErrorService.cs" />
     <Compile Include="Infrastructure\Srvices\Generators\CursorStringGenerator\DataType\DotDataType.cs" />
     <Compile Include="Infrastructure\Srvices\Generators\CursorStringGenerator\DataType\RectangleZoneDataType.cs" />
     <Compile Include="Infrastructure\Srvices\Generators\CursorStringGenerator\DataType\ScreenResolutionDataType.cs" />
@@ -171,6 +170,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Infrastructure\Srvices\Navigation\" />
     <Folder Include="Infrastructure\Structurs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

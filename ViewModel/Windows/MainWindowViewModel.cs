@@ -4,6 +4,7 @@ using PWCreater.Infrastructure.Srvices.BugService;
 using PWCreater.Infrastructure.Srvices.Generators;
 using PWCreater.Infrastructure.Srvices.ProgressBar;
 using PWCreater.Model.UserType;
+using PWCreater.View.Windows;
 using PWCreater.ViewModel.Base;
 using System;
 using System.Threading;
@@ -130,7 +131,9 @@ namespace PWCreater.ViewModel.Windows
         public ICommand CancelGeneratePasswordCommand { get; }
         private void OnCancelGeneratePasswordExecuted(object p)
         {
-            cancelTokenSource.Cancel();
+            //cancelTokenSource.Cancel();
+            var TestWindows = new GenerationWindow();
+            TestWindows.Show();
         }
 
         private bool CanCancelGeneratePasswordExecuted(object p) => true;

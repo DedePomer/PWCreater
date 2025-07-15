@@ -28,7 +28,7 @@
         </StackPanel>
 
         <StackPanel HorizontalAlignment="Center" Grid.Row="1">
-            <ProgressBar Value="{Binding GenerationProgress}" Maximum="100" Minimum="0" Width="450" Height="15" Margin="15 25"></ProgressBar>
+            <ProgressBar Value="{Binding GenerationValue}" Maximum="100" Minimum="0" Width="450" Height="15" Margin="15 25"></ProgressBar>
         </StackPanel>
 
         <StackPanel HorizontalAlignment="Right" Grid.Row="2">
