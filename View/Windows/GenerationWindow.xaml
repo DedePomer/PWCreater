@@ -28,13 +28,12 @@
         </StackPanel>
 
         <StackPanel HorizontalAlignment="Center" Grid.Row="1">
-            <ProgressBar  Maximum="100" Minimum="0" Width="450" Height="15" Margin="15 25"></ProgressBar>
+            <ProgressBar Value="{Binding GenerationProgress}" Maximum="100" Minimum="0" Width="450" Height="15" Margin="15 25"></ProgressBar>
         </StackPanel>
 
         <StackPanel HorizontalAlignment="Right" Grid.Row="2">
             <Button Width="60" Margin="0 30 25 0">Отмена</Button>
         </StackPanel>
-
     </Grid>
     
     

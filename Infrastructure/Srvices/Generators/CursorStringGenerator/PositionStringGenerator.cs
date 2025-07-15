@@ -1,4 +1,11 @@
-﻿using System;
+﻿using PWCreater.Infrastructure.Interfaces;
+using PWCreater.Infrastructure.Srvices.BugService;
+using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.DataType;
+using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.Enums;
+using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.Structurs;
+using PWCreater.Infrastructure.Srvices.ProgressBar;
+using PWCreater.Model.UserType;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.InteropServices;
@@ -6,12 +13,6 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using PWCreater.Infrastructure.Interfaces;
-using PWCreater.Infrastructure.Srvices.BugService;
-using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.DataType;
-using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.Enums;
-using PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator.Structurs;
-using PWCreater.Model.UserType;
 
 namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
 {
@@ -42,10 +43,15 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
         private int _countDotInFifthZone = 10;
         private int _countDotInSixthZone = 10;
 
+        private const int MaxGenerationUnit = 100;
+        private  int _generationUnit;
+
 
 
         public async Task<byte[,]> GetPasswordBytes(int symbolCount, SymbolAlphabet symbolAlphabet, CancellationTokenSource cancelTokenSource)
         {
+            ProgressBarService.Service.ProgressBarValueToZero();
+            _generationUnit = (MaxGenerationUnit / symbolCount) - 1;
             PasswordGenerator passwordGenerator = new PasswordGenerator();
             List<string> dots = await GetCheckedStringAsync(symbolCount, cancelTokenSource);
             byte[,] passwordBytes = GetHASHbytes(dots, symbolCount);
@@ -80,6 +86,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
                         y = point.Y;
                     }
                     await Task.Delay(300);
+                    ProgressBarService.Service.ProgressBarValue += _generationUnit;
                 }
             }
             catch (OperationCanceledException e)
