@@ -1,26 +1,21 @@
 ﻿using PWCreater.Infrastructure.Srvices.ProgressBar;
 using PWCreater.ViewModel.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PWCreater.ViewModel.Windows
 {
-    internal class GenerationWindowViewModel: ViewModelBase
+    internal class GenerationWindowViewModel : ViewModelBase
     {
-        private int _generationProgress;
+        private int _generationValue;
         public int GenerationProgress
         {
-            get => _generationProgress;
+            get => _generationValue;
 
-            set { Set(ref _generationProgress, value); }
+            set { Set(ref _generationValue, value); }
         }
 
         public GenerationWindowViewModel()
         {
-            ProgressBarService
+            _generationValue = ProgressBarService.Service.ProgressBarValue;
         }
     }
 }
