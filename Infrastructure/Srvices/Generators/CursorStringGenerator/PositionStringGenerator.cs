@@ -51,7 +51,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
 
         public async Task<byte[,]> GetPasswordBytes(int symbolCount, SymbolAlphabet symbolAlphabet, CancellationTokenSource cancelTokenSource)
         {
-            _generationUnit = (MaxGenerationUnit / symbolCount) - 1;
+            _generationUnit = (MaxGenerationUnit / symbolCount);
             PasswordGenerator passwordGenerator = new PasswordGenerator();
             List<string> dots = await GetCheckedStringAsync(symbolCount, cancelTokenSource);
             byte[,] passwordBytes = GetHASHbytes(dots, symbolCount);

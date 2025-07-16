@@ -47,7 +47,7 @@ namespace PWCreater.ViewModel.Windows
 
         private void OnProgressOccurred(object sender, int e)
         {
-            if (GenerationValue + e == 100) _generationWindow.Close();
+            if (GenerationValue + (e*3) >= 100) _generationWindow.Close();
             GenerationValue += e;
         }
 
