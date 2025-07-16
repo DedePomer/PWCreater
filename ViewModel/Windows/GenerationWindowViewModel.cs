@@ -12,8 +12,7 @@ namespace PWCreater.ViewModel.Windows
 
             set
             {
-                _generationValue = value;
-                OnPropertyChanged(_generationValue);
+                Set(ref _generationValue, value);
             }
         }
 
