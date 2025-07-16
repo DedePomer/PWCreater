@@ -51,7 +51,6 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
 
         public async Task<byte[,]> GetPasswordBytes(int symbolCount, SymbolAlphabet symbolAlphabet, CancellationTokenSource cancelTokenSource)
         {
-            ProgressBarService.Service.ProgressBarValueToZero();
             _generationUnit = (MaxGenerationUnit / symbolCount) - 1;
             PasswordGenerator passwordGenerator = new PasswordGenerator();
             List<string> dots = await GetCheckedStringAsync(symbolCount, cancelTokenSource);
@@ -67,8 +66,7 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
         }
 
         private async Task<List<string>> GetCheckedStringAsync(int stringCount, CancellationTokenSource cancelTokenSource)
-        {
-            GenerationWindowViewModel generationWindowViewModel = new GenerationWindowViewModel();
+        {           
             CancellationToken token = cancelTokenSource.Token;
             List<string> dots = new List<string>();
             int x = 0, y = 0;
@@ -87,8 +85,8 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
                         x = point.X;
                         y = point.Y;
                     }
-                    await Task.Delay(300);
-                    generationWindowViewModel.GenerationValue += _generationUnit;
+                    ProgressBarService.Service.AddValue(_generationUnit);
+                    await Task.Delay(300);                    
                 }
             }
             catch (OperationCanceledException e)

@@ -23,16 +23,12 @@ namespace PWCreater.Infrastructure.Srvices.ProgressBar
             }
         }
 
-        private int _progressBarValue = 0;
-        public int ProgressBarValue
-        {
-            get => _progressBarValue;
-            set => _progressBarValue = value;
-        }
+        public event EventHandler<int> ProgressOccurred;
 
-        public void ProgressBarValueToZero()
+        public void AddValue(int value)
         {
-            _progressBarValue = 0;
+            ProgressOccurred?.Invoke(this, value);
         }
+    
     }
 }

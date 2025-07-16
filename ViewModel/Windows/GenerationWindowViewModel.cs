@@ -12,10 +12,20 @@ namespace PWCreater.ViewModel.Windows
 
             set
             {
-                Set(ref _generationValue, value);
+                _generationValue = value;
+                OnPropertyChanged();
             }
         }
 
-        public GenerationWindowViewModel() { }
+        public GenerationWindowViewModel()
+        {
+            ProgressBarService.Service.ProgressOccurred += OnProgressOccurred;
+        }
+
+        private void OnProgressOccurred(object sender, int e)
+        {
+            GenerationValue += e;
+        }
+
     }
 }
