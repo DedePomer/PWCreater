@@ -26,7 +26,7 @@ namespace PWCreater.ViewModel.Windows
             }
         }
 
-        public GenerationWindowViewModel(GenerationWindow generationWindow, CancellationTokenSource cancelTokenSource)
+        public GenerationWindowViewModel(GenerationWindow generationWindow, ref CancellationTokenSource cancelTokenSource)
         {
             _generationWindow = generationWindow;
             _cancelTokenSource = cancelTokenSource;
@@ -40,6 +40,7 @@ namespace PWCreater.ViewModel.Windows
         private void OnGenerationCancelCommandExecuted(object p)
         {
             _cancelTokenSource.Cancel();
+            _generationWindow.Close();
         }
         private bool CanGenerationCancelCommandExecuted(object p) => true;
 

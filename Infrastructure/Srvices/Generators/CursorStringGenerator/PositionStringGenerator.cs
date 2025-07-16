@@ -84,8 +84,8 @@ namespace PWCreater.Infrastructure.Srvices.Generators.CursorStringGenerator
                         dots.Add(point.X + "" + point.Y);
                         x = point.X;
                         y = point.Y;
-                    }
-                    ProgressBarService.Service.AddValue(_generationUnit);
+                        ProgressBarService.Service.AddValue(_generationUnit);
+                    }                    
                     await Task.Delay(300);                    
                 }
             }

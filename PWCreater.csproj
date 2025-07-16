@@ -170,7 +170,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Infrastructure\Srvices\Navigation\" />
     <Folder Include="Infrastructure\Structurs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

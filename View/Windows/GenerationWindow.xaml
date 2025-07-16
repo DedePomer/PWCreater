@@ -12,10 +12,7 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None">
 
-    <Window.DataContext>
-        <vm:GenerationWindowViewModel/>
-    </Window.DataContext>
-    
+  
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -32,7 +29,7 @@
         </StackPanel>
 
         <StackPanel HorizontalAlignment="Right" Grid.Row="2">
-            <Button Width="60" Margin="0 30 25 0">Отмена</Button>
+            <Button Command="{Binding GenerationCancelCommand}" Width="60" Margin="0 30 25 0">Отмена</Button>
         </StackPanel>
     </Grid>
     

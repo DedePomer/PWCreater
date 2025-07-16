@@ -89,8 +89,15 @@ namespace PWCreater.ViewModel.Windows
 
             GeneratePasswordCommand = new LamdaCommand(OnGeneratePasswordExecuted, CanGeneratePasswordExecuted);
             CopyPasswordCommand = new LamdaCommand(OnCopyPasswordExecuted, CanCopyPasswordExecuted);
-            CancelGeneratePasswordCommand = new LamdaCommand(OnCancelGeneratePasswordExecuted, CanCancelGeneratePasswordExecuted);
         }
+
+        private void OpenGenerationWindows()
+        {
+            GenerationWindow generationWindow = new GenerationWindow();
+            generationWindow.DataContext = new GenerationWindowViewModel(generationWindow,ref cancelTokenSource);
+            generationWindow.Show();
+        }
+
 
         //команды
         public ICommand CopyPasswordCommand { get; }
@@ -105,6 +112,7 @@ namespace PWCreater.ViewModel.Windows
         private void OnGeneratePasswordExecuted(object p)
         {
             ChoiceGenerationMethodAsync(_selectedGenerationMethod, _alphabet);
+            OpenGenerationWindows();
         }
         private bool CanGeneratePasswordExecuted(object p) => true;
 
@@ -126,16 +134,6 @@ namespace PWCreater.ViewModel.Windows
             }
         }
         #endregion
-
-        public ICommand CancelGeneratePasswordCommand { get; }
-        private void OnCancelGeneratePasswordExecuted(object p)
-        {
-            //cancelTokenSource.Cancel();
-            var TestWindows = new GenerationWindow();
-            TestWindows.Show();
-        }
-
-        private bool CanCancelGeneratePasswordExecuted(object p) => true;
 
 
         private void OnErrorOccurred(object sender, ErrorMessage e)
