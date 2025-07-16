@@ -1,16 +1,15 @@
-﻿using PWCreater.Infrastructure.Commands;
-using PWCreater.Infrastructure.Enums;
-using PWCreater.Infrastructure.Srvices.BugService;
-using PWCreater.Infrastructure.Srvices.Generators;
-using PWCreater.Infrastructure.Srvices.ProgressBar;
-using PWCreater.Model.UserType;
-using PWCreater.View.Windows;
-using PWCreater.ViewModel.Base;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using PWCreater.Infrastructure.Commands;
+using PWCreater.Infrastructure.Enums;
+using PWCreater.Infrastructure.Srvices.BugService;
+using PWCreater.Infrastructure.Srvices.Generators;
+using PWCreater.Model.UserType;
+using PWCreater.View.Windows;
+using PWCreater.ViewModel.Base;
 
 namespace PWCreater.ViewModel.Windows
 {
@@ -86,7 +85,7 @@ namespace PWCreater.ViewModel.Windows
         public MainWindowViewModel()
         {
             ErrorService.Service.ErrorOccurred += OnErrorOccurred;
-            
+
 
             GeneratePasswordCommand = new LamdaCommand(OnGeneratePasswordExecuted, CanGeneratePasswordExecuted);
             CopyPasswordCommand = new LamdaCommand(OnCopyPasswordExecuted, CanCopyPasswordExecuted);
