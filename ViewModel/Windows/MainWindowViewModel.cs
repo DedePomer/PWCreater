@@ -129,7 +129,6 @@ namespace PWCreater.ViewModel.Windows
                 case GenerationMethodEnum.CursorGenerator:
                     PasswordGenerator passwordGenerator = new PasswordGenerator();
                     PasswordString = await passwordGenerator.GeneratePassword(_countSymbols, _alphabet, generationMethodEnum, cancelTokenSource);
-                    MessageBox.Show("всё");
                     break;
             }
         }
@@ -138,7 +137,7 @@ namespace PWCreater.ViewModel.Windows
 
         private void OnErrorOccurred(object sender, ErrorMessage e)
         {
-            MessageBox.Show(e.NameOfExceptiom.Message);
+            //MessageBox.Show(e.NameOfExceptiom.Message);
         }
 
 
